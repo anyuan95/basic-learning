@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -33,8 +34,79 @@ public class FutureTest {
 //        thenAcceptExample();
 //        completeExceptionallyExample();
 //        completeExceptionallyExample2();
-        tryWait();
+//        completeExceptionallyExample3();
+//        tryWait();
+//        System.out.println(System.currentTimeMillis());
+//        cancelExample();
+        joinOrGet();
         System.out.println(LocalDateTime.now());
+    }
+
+    static void joinOrGet() {
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> multipart(5)).supplyAsync(() -> multipart(25));
+        System.out.println(Thread.currentThread().getName());
+        System.out.println(future.join());
+        System.out.println(Thread.currentThread().getName());
+//        sleep();
+        System.out.println(RES);
+//        sleep();
+    }
+
+    static Integer RES = 0;
+
+    public static Integer multipart(Integer a) {
+        try {
+            System.out.println(Thread.currentThread().getName());
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getName());
+        RES = 30;
+        System.out.println(Thread.currentThread().getName());
+        return a * a;
+    }
+
+    static void cancelExample() throws ExecutionException, InterruptedException {
+        CompletableFuture cf = CompletableFuture.completedFuture("message")
+                .thenApplyAsync(s -> {
+                    sleep();
+                    System.out.println(s);
+                    return s.toUpperCase();
+                });
+//        final boolean cancel = cf.cancel(true);
+//        System.out.println(cancel);
+        CompletableFuture cf2 = cf.exceptionally(throwable -> "canceled message");
+        assertTrue("Was not canceled", cf.cancel(true));
+        assertTrue("Was not completed exceptionally", cf.isCompletedExceptionally());
+        assertEquals("canceled message", cf2.join());
+        sleep();
+        sleep();
+    }
+
+    static void completeExceptionallyExample3() throws ExecutionException, InterruptedException {
+        // 执行异步任务
+        CompletableFuture cf = CompletableFuture.supplyAsync(() -> {
+            System.out.println("cf 任务执行开始");
+            sleep(10000);
+            System.out.println("cf 任务执行结束");
+            return "楼下小黑哥";
+        });
+//
+        Executors.newSingleThreadScheduledExecutor().execute(() -> {
+            sleep(5000);
+            System.out.println("主动设置 cf 异常");
+            // 设置任务结果，由于 cf 任务未执行结束，结果返回 true
+            cf.completeExceptionally(new RuntimeException("啊，挂了"));
+        });
+// 由于 cf 未执行结束，前 5 秒将会被阻塞。后续程序抛出异常，结束
+        System.out.println("get:" + cf.get());
+/***
+ * cf 任务执行开始
+ * 主动设置 cf 异常
+ * java.util.concurrent.ExecutionException: java.lang.RuntimeException: 啊，挂了
+ * ......
+ */
     }
 
     static void tryWait() {
@@ -94,7 +166,24 @@ public class FutureTest {
         CompletableFuture cf = CompletableFuture
                 .completedFuture("message")
 //                .supplyAsync(() -> "test")
-                .thenApplyAsync(s -> s)
+                .thenApplyAsync(s -> {
+//                    sleep();
+                    System.out.println(Thread.currentThread().getName());
+                    System.out.println("started at: " + LocalDateTime.now());
+                    final long currentTimeMillis = System.currentTimeMillis();
+                    while (System.currentTimeMillis() < currentTimeMillis + 2000) {
+                        if (System.currentTimeMillis() > currentTimeMillis + 1800) {
+                            System.out.print("y");
+                        }
+                    }
+                    System.out.println("finished at: " + LocalDateTime.now());
+                    return s;
+                }).thenApplyAsync(s -> {
+                    for (int i = 0; i < 100; i++) {
+                        System.out.println("e");
+                    }
+                    return s;
+                })
 //                .thenApply(Integer::valueOf)
                 ;
 //        cf.handle((object, throwable) -> {
@@ -103,9 +192,16 @@ public class FutureTest {
 //            System.out.println(throwable);
 //            return "yep";
 //        });
-        cf.completeExceptionally(new Exception("my exception"));
+        Thread.sleep(1000L);
+        cf.completeExceptionally(new RuntimeException("my exception"));
         System.out.println(cf.isCompletedExceptionally());
-        System.out.println(cf.get());
+        try {
+            System.out.println(cf.get());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        sleep();
+        sleep();
 
 //                .thenApplyAsync(String::toUpperCase, CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS));
 //        CompletableFuture exceptionHandler = cf.handle((s, th) -> {
@@ -176,6 +272,14 @@ public class FutureTest {
         sleep();
         sleep();
         sleep();
+    }
+
+    static void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     static void sleep() {

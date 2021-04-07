@@ -1,3 +1,6 @@
 logging:
   config: classpath:logback-spring.xml
   dir: ${user.home}/${spring.application.name}/logs
+spring:
+  application:
+    name: basic-learning
