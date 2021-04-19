@@ -77,4 +77,18 @@ public class TestLambda {
 
     }
 
+    @Test
+    public void testUnfinishedStream() {
+//        final Stream<String> stringStream = Stream.of("hello", "world").filter(str -> str.startsWith("h"));
+
+        final ArrayList<Integer> integers = Lists.newArrayList(1, 2, 3);
+        final Stream<Integer> integerStream = integers.stream().filter(integer -> {
+            integer++;
+            return true;
+        });
+
+        System.out.println(integers);
+
+    }
+
 }
