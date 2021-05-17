@@ -1,4 +1,4 @@
-package org.example.thread;
+package org.example.juc.thread;
 
 public class Test2 {
     public static void main(String[] args) throws Exception {

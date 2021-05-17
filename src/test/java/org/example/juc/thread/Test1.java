@@ -1,4 +1,4 @@
-package org.example.thread;
+package org.example.juc.thread;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
