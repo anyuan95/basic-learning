@@ -1,4 +1,4 @@
-package org.example.juc.interview;
+package org.example.juc.interview.i1;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @author anyuan
  * @since 2021-05-17 16:23
  */
-public class TestInterview1_OnlySync {
+public class TestInterview1_1_OnlySync {
 
     private static class MyCollection<V> {
 

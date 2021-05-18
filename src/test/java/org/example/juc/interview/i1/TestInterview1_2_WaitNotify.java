@@ -1,4 +1,4 @@
-package org.example.juc.interview;
+package org.example.juc.interview.i1;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,7 @@ import java.util.List;
  * @author anyuan
  * @since 2021-05-17 17:50
  */
-public class TestInterview1_WaitNotify {
+public class TestInterview1_2_WaitNotify {
 
     private static class MyCollection<V> {
 
