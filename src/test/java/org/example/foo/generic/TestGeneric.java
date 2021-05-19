@@ -1,4 +1,4 @@
-package org.example.generic;
+package org.example.foo.generic;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.example.binary;
+package org.example.foo.binary;
 
 /**
  * @author anyuan

@@ -1,4 +1,4 @@
-package org.example.basic;
+package org.example.foo.basic;
 
 public class TestInteger {
 

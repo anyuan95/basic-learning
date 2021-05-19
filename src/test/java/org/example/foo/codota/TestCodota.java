@@ -1,4 +1,4 @@
-package org.example.codota;
+package org.example.foo.codota;
 
 import lombok.SneakyThrows;
 

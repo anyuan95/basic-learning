@@ -1,11 +1,10 @@
 package org.example.lambda;
 
 import cn.hutool.core.collection.ListUtil;
-import cn.hutool.core.io.LineHandler;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import org.example.model.Gender;
-import org.example.model.User;
+import org.example.foo.model.Gender;
+import org.example.foo.model.User;
 import org.junit.Test;
 
 import java.util.ArrayList;

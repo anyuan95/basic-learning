@@ -1,4 +1,4 @@
-package org.example.guava;
+package org.example.foo.guava;
 
 import com.google.common.collect.HashBasedTable;
 import org.junit.Test;
