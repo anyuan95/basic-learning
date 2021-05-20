@@ -9,7 +9,7 @@ import java.util.concurrent.CyclicBarrier;
  * @author anyuan
  * @since 2021-05-18 14:48
  */
-public class Resolution_CyclicBarrier {
+public class Solution_CyclicBarrier {
 
     public static void main(String[] args) {
 //        System.out.println((int) 'A');

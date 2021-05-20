@@ -6,7 +6,7 @@ import java.util.concurrent.locks.LockSupport;
  * @author anyuan
  * @since 2021-05-18 14:57
  */
-public class Resolution_LockSupport {
+public class Solution_LockSupport {
 
     static Thread t1 = null, t2 = null;
 
@@ -20,12 +20,20 @@ public class Resolution_LockSupport {
             }
             LockSupport.unpark(t2);
         });
+//        t2 = new Thread(() -> {
+//            LockSupport.park();
+//            for (int i = 1; i <= 26; i++) {
+//                System.out.print(i);
+//                LockSupport.unpark(t1);
+//                LockSupport.park();
+//            }
+//        });
+
         t2 = new Thread(() -> {
-            LockSupport.park();
             for (int i = 1; i <= 26; i++) {
+                LockSupport.park();
                 System.out.print(i);
                 LockSupport.unpark(t1);
-                LockSupport.park();
             }
         });
 
