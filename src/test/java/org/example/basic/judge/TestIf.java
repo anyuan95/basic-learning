@@ -1,4 +1,4 @@
-package org.example.basic.word;
+package org.example.basic.judge;
 
 /**
  * @author anyuan
