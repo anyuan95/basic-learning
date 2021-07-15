@@ -1,0 +1,20 @@
+logging:
+  level:
+    org.example.spring.mybatis.dao.mapper: DEBUG
+
+spring:
+  application:
+    name: spring-mybatis
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://139.198.28.158:13306/learn?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: Mxl951213+
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 3
+      auto-commit: true
+      idle-timeout: 10000
+#      pool-name: learn-pool
+      max-lifetime: 1800000
+      connection-timeout: 30000
