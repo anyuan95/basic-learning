@@ -20,10 +20,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-<!--        <powermock.version>2.0.9</powermock.version>-->
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
         <guava.version>30.0-jre</guava.version>
         <hutool.version>5.7.4</hutool.version>
+        <jol-cli.version>0.15</jol-cli.version>
     </properties>
 
     <parent>
@@ -45,6 +45,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
@@ -60,6 +65,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-cli</artifactId>
+            <version>${jol-cli.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -67,37 +78,11 @@
     </dependencies>
 
     <!--    <dependencies>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.springframework.boot</groupId>-->
-    <!--            <artifactId>spring-boot-starter-webflux</artifactId>-->
-    <!--        </dependency>-->
 
     <!--        <dependency>-->
     <!--            <groupId>io.fabric8</groupId>-->
     <!--            <artifactId>openshift-client</artifactId>-->
     <!--            <version>4.7.0</version>-->
-    <!--        </dependency>-->
-
-    <!--        <dependency>-->
-    <!--            <groupId>com.google.guava</groupId>-->
-    <!--            <artifactId>guava</artifactId>-->
-    <!--            <version>30.0-jre</version>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.openjdk.jol</groupId>-->
-    <!--            <artifactId>jol-cli</artifactId>-->
-    <!--            <version>0.15</version>-->
-    <!--        </dependency>-->
-
-    <!--        <dependency>-->
-    <!--            <groupId>cn.hutool</groupId>-->
-    <!--            <artifactId>hutool-all</artifactId>-->
-    <!--            <version>5.5.1</version>-->
-    <!--        </dependency>-->
-
-    <!--        <dependency>-->
-    <!--            <groupId>com.squareup.okhttp3</groupId>-->
-    <!--            <artifactId>okhttp</artifactId>-->
     <!--        </dependency>-->
 
     <!--        <dependency>-->
@@ -111,41 +96,6 @@
     <!--            <artifactId>httpcore</artifactId>-->
     <!--            <version>4.4.10</version>-->
     <!--        </dependency>-->
-
-    <!--        <dependency>-->
-    <!--            <groupId>mysql</groupId>-->
-    <!--            <artifactId>mysql-connector-java</artifactId>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>com.h2database</groupId>-->
-    <!--            <artifactId>h2</artifactId>-->
-    <!--        </dependency>-->
-
-    <!--        <dependency>-->
-    <!--            <groupId>cglib</groupId>-->
-    <!--            <artifactId>cglib</artifactId>-->
-    <!--            <version>3.3.0</version>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.reflections</groupId>-->
-    <!--            <artifactId>reflections</artifactId>-->
-    <!--            <version>0.9.12</version>-->
-    <!--        </dependency>-->
-
-    <!--        <dependency>-->
-    <!--            <groupId>com.lmax</groupId>-->
-    <!--            <artifactId>disruptor</artifactId>-->
-    <!--            <version>3.4.4</version>-->
-    <!--        </dependency>-->
-
-
-    <!--        <dependency>-->
-    <!--            <groupId>org.powermock</groupId>-->
-    <!--            <artifactId>powermock-module-junit4</artifactId>-->
-    <!--            <version>${powermock.version}</version>-->
-    <!--            <scope>test</scope>-->
-    <!--        </dependency>-->
-
 
     <!--        <dependency>-->
     <!--            <groupId>org.projectlombok</groupId>-->
