@@ -1,49 +1,21 @@
-package org.example.lambda;
+package org.example.basic.java.feature8;
 
 import cn.hutool.core.collection.ListUtil;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import org.example.foo.model.Gender;
-import org.example.foo.model.User;
+import org.example.basic.java.feature8.model.Gender;
+import org.example.basic.java.feature8.model.User;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.IntSummaryStatistics;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Function;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * @author anyuan
- * @since 2021-02-22 10:29
+ * @since 2021-07-22 11:00
  */
-public class TestLambda {
-
-    interface Swapper {
-        void swap(int[] array, int startIndex, int endIndex);
-    }
-
-    private static void execute(Swapper swapper, int[] array, int startIndex, int endIndex) {
-        swapper.swap(array, startIndex, endIndex);
-    }
-
-    public static void main(String[] args) {
-        int[] myArray = {3, 1, 4, 5, 2};
-        Swapper swapper = (array, startIndex, endIndex) -> {
-            int temp = array[startIndex];
-            array[startIndex] = array[endIndex];
-            array[endIndex] = temp;
-        };
-        swapper.swap(myArray, 0, 4);
-        System.out.println(Arrays.toString(myArray));
-    }
+public class TestStream {
 
     @Test
     public void testToMap() {
@@ -215,36 +187,4 @@ public class TestLambda {
         System.out.println(userStream.count());
         System.out.println(users);
     }
-
-    @Test
-    public void testChar() {
-        char a = 0x22;
-        System.out.println(a);
-    }
-
-    @Test
-    public void testForEach() {
-        List<Integer> list = null;
-        for (Integer integer : list) {
-            System.out.println(integer );
-        }
-    }
-
-    @Test
-    public void testOverload() {
-        final Function<String, TestBean> strFunc = TestBean::new;
-        final Function<Integer, TestBean> integerFunc = TestBean::new;
-    }
-
-    class TestBean {
-        private Integer id;
-        private String name;
-        public TestBean(Integer id) {
-            this.id = id;
-        }
-        public TestBean(String name) {
-            this.name = name;
-        }
-    }
-
 }

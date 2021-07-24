@@ -11,6 +11,7 @@
     <modules>
         <module>basic</module>
         <module>spring</module>
+        <module>docker</module>
     </modules>
 
     <name>basic-learning</name>
@@ -40,6 +41,17 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>4.0.3</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

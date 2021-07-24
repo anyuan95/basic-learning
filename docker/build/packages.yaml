@@ -1,0 +1,13 @@
+common:
+  - vim
+  - curl
+  - wget
+  - tree
+yum:
+  - yum-utils
+  - nfs-utils
+  - epel-release
+  - jq
+  - yq
+centos:
+  - centos-release

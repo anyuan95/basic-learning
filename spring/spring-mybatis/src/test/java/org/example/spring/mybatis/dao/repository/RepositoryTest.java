@@ -19,7 +19,7 @@ import java.util.ArrayList;
 //@ComponentScan("org.example.spring.mybatis")
 //@MybatisPlusTest
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class MyBatisPlusTest {
+public class RepositoryTest {
 
     @Autowired
     private StudentRepository studentRepository;

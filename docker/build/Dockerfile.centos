@@ -1,0 +1,51 @@
+# 使用centos 7.9 作为base构建镜像
+FROM centos:7.9.2009 as centos7
+
+# 代理
+ENV http_proxy "http://172.23.0.78:7890"
+ENV HTTP_PROXY "http://172.23.0.78:7890"
+ENV https_proxy "http://172.23.0.78:7890"
+ENV HTTPS_PROXY "http://172.23.0.78:7890"
+
+# 定义centos的版本和处理器体系架构
+ARG OS_VERSION=7
+ARG ARCH=x86_64
+
+# 在这里定义一些构建时需要的软件包
+ARG BUILD_TOOLS="yum-utils createrepo centos-release-gluster epel-release curl"
+
+# 安装构建工具和配置一些软件源 repo
+RUN yum install -q -y $BUILD_TOOLS \
+  && yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+# 调整默认的yum源位置
+RUN sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+      -e 's|^#baseurl=http://mirror.centos.org|baseurl=https://mirrors.tuna.tsinghua.edu.cn|g' \
+      -i.bak \
+      /etc/yum.repos.d/CentOS-*.repo \
+  && yum makecache \
+  && yum update -y -q
+
+# 需要安装yq和jq这两个工具来处理packages.yaml配置文件
+RUN curl -sL -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v4.9.3/yq_linux_amd64 \
+  && chmod a+x /usr/local/bin/yq \
+  && curl -sL -o /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 \
+  && chmod a+x /usr/local/bin/jq
+
+# 解析packages.yml配置文件，生成所需要的 packages.list 文件wORKDIR / centos/$oS_VERSION/oS/$ARCH
+COPY packages.yaml packages.yaml
+
+# 使用yq先将YAML文件转换成json格式的内容，再使用jq过滤出所需要的包，输出为一个列表
+RUN yq eval packages.yaml -j | jq -r '.common[],.yum[],.centos[]' | sort -u > packages.list \
+  && rpm -qa >> packages.list
+
+# 下载packages.list中的软件包，并生成repo索引文件
+RUN cat packages.list | xargs yumdownloader --resolve \
+  && createrepo -d .
+
+# 将构建产物复制到一层空的镜像中，方便导出为tar包或目录的格式
+FROM scratch
+COPY --from=centos7 /centos /centos
+
+#FROM nginx :1.19
+#COPY --from=centos7 /centos /

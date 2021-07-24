@@ -9,16 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>basic</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>online-judge</module>
-        <module>java-basic</module>
-        <module>foo-test</module>
-        <module>algorithm</module>
-        <module>tools</module>
-        <module>springless-frameworks</module>
-    </modules>
+    <artifactId>docker</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
