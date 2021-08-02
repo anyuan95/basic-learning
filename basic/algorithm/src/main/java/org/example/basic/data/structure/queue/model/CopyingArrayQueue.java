@@ -1,4 +1,4 @@
-package org.example.basic.data.structure.queue;
+package org.example.basic.data.structure.queue.model;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -7,19 +7,19 @@ import java.util.Collection;
  * @author anyuan
  * @date 2020-12-25 10:36:22
  */
-public class ArrayQueue<T> {
+public class CopyingArrayQueue<T> {
 
     private Object[] elementData;
     private int head = 0, tail = 0;
 
-    public ArrayQueue() {
+    public CopyingArrayQueue() {
         elementData = new Object[10];
     }
-    public ArrayQueue(int capacity) {
+    public CopyingArrayQueue(int capacity) {
         elementData = new Object[capacity];
     }
 
-    public ArrayQueue(Collection<T> collection) {
+    public CopyingArrayQueue(Collection<T> collection) {
         int oldCapacity = collection.size();
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         elementData = new Object[newCapacity];

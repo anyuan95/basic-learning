@@ -8,7 +8,7 @@ public interface Stack<T> {
 
     T pop();
 
-    T push();
+    T push(T value);
 
     T peek();
 

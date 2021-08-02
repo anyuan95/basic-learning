@@ -1,4 +1,6 @@
-package org.example.basic.algorithm.sort;
+package org.example.basic.algorithm.sort.old;
+
+import org.example.basic.algorithm.sort.Sort;
 
 import java.util.Arrays;
 

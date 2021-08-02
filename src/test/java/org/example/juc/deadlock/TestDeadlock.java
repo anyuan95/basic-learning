@@ -1,6 +1,5 @@
 package org.example.juc.deadlock;
 
-import org.example.juc.SleepHelper;
 
 /**
  * @author anyuan

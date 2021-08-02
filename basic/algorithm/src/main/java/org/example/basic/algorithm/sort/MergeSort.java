@@ -4,57 +4,52 @@ import java.util.Arrays;
 
 /**
  * @author anyuan
- * @since 2021-01-18 11:28
+ * @since 2021-08-01 17:41
  */
 public class MergeSort extends Sort {
 
-    public static void main(String[] args) {
-        int[] array = {4, 5, 3, 6, 2, 5, 1};
-        System.out.println(Arrays.toString(sort(array)));
-    }
-
-    private static int[] sort(int[] array) {
+    private int[] sort(int[] array) {
         sort0(array, 0, array.length - 1);
         return array;
     }
 
-    private static void sort0(int[] array, int start, int end) {
-        if (start >= end) {
+    private void sort0(int[] array, int start, int end) {
+        if (start == end) {
             return;
         }
-        final int middleIndex = (start + end) / 2;
-        sort0(array, start, middleIndex);
-        sort0(array, middleIndex + 1, end);
-        merge(array, start, end);
+        int middle = start + ((end - start) >> 1);
+        sort0(array, start, middle);
+        sort0(array, middle + 1, end);
+        merge(array, start, middle, end);
     }
 
-    private static void merge(int[] array, int start, int end) {
-        int i = start, j = (start + end) / 2, p = (start + end) / 2 + 1, q = end;
-        System.out.println("i=" + i + ",j=" + j + ",p=" + p + ",q=" + q + ",array=" + Arrays.toString(array));
-
-        int k = 0;
-        final int[] temp = new int[end - start + 1];
-
-        while (i <= j && p <= q) {
-            if (array[i] <= array[p]) {
-                temp[k++] = array[i++];
+    private void merge(int[] array, int start, int middle, int end) {
+        int[] tempArray = new int[end - start + 1];
+        int lIndex = start, rIndex = middle + 1, lEnd = middle, rEnd = end;
+        int nIndex = 0;
+        while (lIndex <= lEnd && rIndex <= rEnd) {
+            if (array[lIndex] < array[rIndex]) {
+                tempArray[nIndex++] = array[lIndex++];
             } else {
-                temp[k++] = array[p++];
+                tempArray[nIndex++] = array[rIndex++];
             }
         }
-        /* !!! for(;=;) */
-        if (i <= j) {
-            for (int l = i; l <= j; l++) {
-                temp[k++] = array[l];
+        if (lIndex <= lEnd) {
+            while (lIndex <= lEnd) {
+                tempArray[nIndex++] = array[lIndex++];
             }
-        } else if (p <= q) {
-            for (int l = p; l <= q; l++) {
-                temp[k++] = array[l];
+        } else if (rIndex <= rEnd) {
+            while (rIndex <= rEnd) {
+                tempArray[nIndex++] = array[rIndex++];
             }
         }
-        for (int l = 0; l < k; l++) {
-            array[start++] = temp[l];
+        for (int i = 0; i < tempArray.length; i++) {
+            array[start + i] = tempArray[i];
         }
     }
 
+    public static void main(String[] args) {
+        int[] arr = {1,4,2,8,5,7};
+        System.out.println(Arrays.toString(new MergeSort().sort(arr)));
+    }
 }
