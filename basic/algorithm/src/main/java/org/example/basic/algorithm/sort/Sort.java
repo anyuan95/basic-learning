@@ -6,6 +6,8 @@ package org.example.basic.algorithm.sort;
  */
 public abstract class Sort {
 
+    protected abstract void sort(int[] array);
+
     protected static void swap(int[] array, int index1, int index2) {
         int temp = array[index1];
         array[index1] = array[index2];

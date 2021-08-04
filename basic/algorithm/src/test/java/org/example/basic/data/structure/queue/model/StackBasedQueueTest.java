@@ -29,4 +29,23 @@ public class StackBasedQueueTest {
         System.out.println(queue.remove());
     }
 
+    @Test
+    public void testThreadUnsafe() throws InterruptedException {
+        final StackBasedQueue<Object> queue = new StackBasedQueue<>();
+        final Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 10000; i++) {
+                queue.add(i);
+            }
+        });
+        final Thread t2 = new Thread(() -> {
+            for (int i = 0; i < 10000; i++) {
+                System.out.println(queue.remove());
+            }
+        });
+        t1.start();
+        t2.start();
+        Thread.sleep(100000L);
+
+    }
+
 }

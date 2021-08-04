@@ -15,6 +15,7 @@ import java.util.Stack;
  * 2.在每次push操作完成后倒入，或者在每次pop操作前倒入
  *
  * TODO 如何做到线程安全
+ * TODO 如何证明不是线程安全的
  *
  * @author anyuan
  * @since 2021-08-01 14:30
@@ -41,18 +42,19 @@ public class StackBasedQueue<T> implements Queue<T> {
     @Override
     public boolean add(T t) {
         pushStack.push(t);
-        shuffleStack();
+//        shuffleStack();
         return true;
+    }
+
+    @Override
+    public T remove() {
+        shuffleStack();
+        return popStack.pop();
     }
 
     @Override
     public boolean offer(T t) {
         return false;
-    }
-
-    @Override
-    public T remove() {
-        return popStack.pop();
     }
 
     @Override

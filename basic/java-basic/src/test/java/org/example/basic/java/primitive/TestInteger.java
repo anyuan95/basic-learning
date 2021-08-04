@@ -2,8 +2,6 @@ package org.example.basic.java.primitive;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @author anyuan
  * @since 2021-07-27 16:40
@@ -27,5 +25,13 @@ public class TestInteger {
 //        int a = (int) 0.5;
         int a = (int) 0.9999;
         System.out.println(a);
+    }
+
+    @Test
+    public void overflow() {
+        int a = Integer.MAX_VALUE;
+        System.out.println(++a);
+        System.out.println(--a);
+        System.out.println(a == Integer.MAX_VALUE);
     }
 }

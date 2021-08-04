@@ -12,12 +12,12 @@ public class MergeSort extends Sort {
 
     public static void main(String[] args) {
         int[] array = {4, 5, 3, 6, 2, 5, 1};
-        System.out.println(Arrays.toString(sort(array)));
+        new MergeSort().sort(array);
+        System.out.println(Arrays.toString(array));
     }
 
-    private static int[] sort(int[] array) {
+    protected void sort(int[] array) {
         sort0(array, 0, array.length - 1);
-        return array;
     }
 
     private static void sort0(int[] array, int start, int end) {
