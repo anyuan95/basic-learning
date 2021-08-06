@@ -10,10 +10,10 @@ public class TestPriorityQueue {
 
     public static void main(String[] args) {
         final PriorityQueue<String> queue = new PriorityQueue<>();
-        queue.add("a");
-        queue.add("b");
         queue.add("c");
+        queue.add("a");
         queue.add("d");
+        queue.add("b");
         queue.add("e");
         final int size = queue.size();
 //        for (int i = 0, realSize = queue.size(); i < size; i++, realSize = queue.size()) {
@@ -21,7 +21,7 @@ public class TestPriorityQueue {
 //            System.out.println(realSize);
 //        }
 
-        for (int i = 0; i < queue.size(); i++) {
+        for (int i = 0; i < size; i++) {
             System.out.println(queue.poll());
         }
     }
