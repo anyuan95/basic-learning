@@ -15,6 +15,7 @@ public class TestHashMap {
         final HashMap<String, Integer> map = new HashMap<>();
         map.put("any", 26);
         map.put("llarao", 27);
+        map.compute("llarao", (s, integer) -> integer == null ? 27 : integer + 1);
         map.compute("lpd", (s, integer) -> integer == null ? 27 : integer + 1);
         System.out.println(map);
 
