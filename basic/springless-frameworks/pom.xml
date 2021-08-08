@@ -22,6 +22,12 @@
             <artifactId>commons-dbutils</artifactId>
             <version>1.7</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.mountcloud</groupId>
+            <artifactId>graphql-client</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
 
 </project>
