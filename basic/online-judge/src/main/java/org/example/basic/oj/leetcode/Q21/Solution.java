@@ -3,59 +3,57 @@ package org.example.basic.oj.leetcode.Q21;
 import lombok.ToString;
 
 /**
+ * 合并两个升序链表
+ *
  * @author anyuan
- * @since 2021-07-29 14:11
+ * @since 2021-08-09 23:14
  */
 class Solution {
+    @ToString
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1 == null) return l2;
         if (l2 == null) return l1;
-        ListNode prev = null, next = null, finalHead = null;
-        finalHead = l1.val > l2.val ? l2 : l1;
-        while (l2 != null && l1 != null) {
-            if (l1.val > l2.val) {
-                next = l2.next;
-                l2.next = l1;
-                if (prev != null) {
-                    prev.next = l2;
-                }
-                prev = l2;
-                l2 = next;
+        ListNode preHead = new ListNode(), curr = preHead;
+        ListNode curr1 = l1, curr2 = l2;
+        while (curr1 != null && curr2 != null) {
+            if (curr1.val > curr2.val) {
+                curr.next = curr2;
+                curr2 = curr2.next;
             } else {
-                prev = l1;
-                l1 = l1.next;
+                curr.next = curr1;
+                curr1 = curr1.next;
             }
+            curr = curr.next;
         }
-        if (l1 != null) {
-            prev.next = l1;
+        if (curr1 != null) {
+            curr.next = curr1;
         } else {
-            prev.next = l2;
+            curr.next = curr2;
         }
-        return finalHead;
+        return preHead.next;
     }
 
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(1, new ListNode(3, new ListNode(5, new ListNode(7, null))));
-        ListNode l2 = new ListNode(2, new ListNode(4, new ListNode(6, new ListNode(8, null))));
-        System.out.println(new Solution().mergeTwoLists(l1, l2));
-    }
-
-}
-
-@ToString
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode() {
-    }
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
+        ListNode head1 = new ListNode(-9, new ListNode(3));
+        ListNode head2 = new ListNode(5, new ListNode(7));
+        final Solution solution = new Solution();
+        System.out.println(solution.mergeTwoLists(head1, head2));
     }
 }
