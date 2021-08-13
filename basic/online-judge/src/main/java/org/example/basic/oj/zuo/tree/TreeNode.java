@@ -1,4 +1,4 @@
-package org.example.basic.oj.zuo;
+package org.example.basic.oj.zuo.tree;
 
 public class TreeNode {
     int val;

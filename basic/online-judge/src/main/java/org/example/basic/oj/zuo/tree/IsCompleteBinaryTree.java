@@ -1,4 +1,4 @@
-package org.example.basic.oj.zuo;
+package org.example.basic.oj.zuo.tree;
 
 /**
  * 判断传入的树是否是满二叉树。

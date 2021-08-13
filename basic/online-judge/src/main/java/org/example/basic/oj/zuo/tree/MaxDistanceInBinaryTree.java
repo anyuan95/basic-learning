@@ -1,4 +1,4 @@
-package org.example.basic.oj.zuo;
+package org.example.basic.oj.zuo.tree;
 
 /**
  * 求一个二叉树中的节点最大距离。

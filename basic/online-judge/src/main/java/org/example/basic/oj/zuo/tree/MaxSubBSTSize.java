@@ -1,4 +1,4 @@
-package org.example.basic.oj.zuo;
+package org.example.basic.oj.zuo.tree;
 
 /**
  * 统计给定的二叉树中，所有是搜索二叉树的子树中，节点数量最多的一个。
