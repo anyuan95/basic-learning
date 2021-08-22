@@ -1,15 +1,10 @@
 package org.example.basic.oj.leetcode.Q21;
 
-import lombok.ToString;
-
 /**
- * 合并两个升序链表
- *
  * @author anyuan
- * @since 2021-08-09 23:14
+ * @since 2021-08-22 18:32
  */
 class Solution {
-    @ToString
     static class ListNode {
         int val;
         ListNode next;
@@ -27,33 +22,46 @@ class Solution {
         }
     }
 
+    /**
+     * 两种方式，
+     * 图方便就加一个临时的head节点，然后把1和2中的节点往后放；
+     * 节约空间就先选出来头结点，然后再依次往后放；
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if (l1 == null) return l2;
-        if (l2 == null) return l1;
-        ListNode preHead = new ListNode(), curr = preHead;
-        ListNode curr1 = l1, curr2 = l2;
-        while (curr1 != null && curr2 != null) {
-            if (curr1.val > curr2.val) {
-                curr.next = curr2;
-                curr2 = curr2.next;
-            } else {
-                curr.next = curr1;
-                curr1 = curr1.next;
-            }
-            curr = curr.next;
+        if (l1 == null) {
+            return l2;
         }
-        if (curr1 != null) {
-            curr.next = curr1;
+        if (l2 == null) {
+            return l1;
+        }
+        ListNode head = null;
+        if (l1.val <= l2.val) {
+            head = l1;
+            l1 = l1.next;
         } else {
-            curr.next = curr2;
+            head = l2;
+            l2 = l2.next;
         }
-        return preHead.next;
-    }
-
-    public static void main(String[] args) {
-        ListNode head1 = new ListNode(-9, new ListNode(3));
-        ListNode head2 = new ListNode(5, new ListNode(7));
-        final Solution solution = new Solution();
-        System.out.println(solution.mergeTwoLists(head1, head2));
+        ListNode current = head;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                current.next = l1;
+                l1 = l1.next;
+            } else {
+                current.next = l2;
+                l2 = l2.next;
+            }
+            current = current.next;
+        }
+        if (l1 != null) {
+            current.next = l1;
+        } else if (l2 != null) {
+            current.next = l2;
+        }
+        return head;
     }
 }
