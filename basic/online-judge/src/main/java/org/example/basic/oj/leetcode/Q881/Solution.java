@@ -11,8 +11,6 @@ class Solution {
         // 按体重升序
         Arrays.sort(people);
         int boatCount = 0;
-        boolean[] boated = new boolean[people.length];
-
         int lightestPeopleIndex = 0;
         // 从后往前效率应该更高
         for (int i = people.length - 1; i >= lightestPeopleIndex; i--) {
