@@ -96,7 +96,7 @@ class HashFunction {
         for (int i = 0; i < len; i++) {
             result = seed * result + value.charAt(i);
         }
-        int r = (size - 1) & result;
+//        int r = (size - 1) & result;
         return (size - 1) & result;
     }
 }
