@@ -7,6 +7,12 @@ import java.util.Arrays;
  */
 class Solution {
 
+    /**
+     * 写完Solution_0831后回来看，感觉当时写的更乱，还不如新写的算法，虽然有冗余的计算，但是（比这个）一目了然
+     *
+     * @param nums
+     * @return
+     */
     public int maxProduct(int[] nums) {
         int max = Integer.MIN_VALUE, tempMin = 1, tempMax = 1;
         boolean lastNumIsZero = false, hasZero = false;
