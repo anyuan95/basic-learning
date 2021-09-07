@@ -2,6 +2,7 @@ package org.example.spring.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Import;
 public class SpringWebMainApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringWebMainApplication.class, args);
+        final ConfigurableApplicationContext context = SpringApplication.run(SpringWebMainApplication.class, args);
+        System.out.println(context.getBean("owner"));
     }
 }

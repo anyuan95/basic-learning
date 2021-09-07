@@ -1,14 +1,11 @@
 package org.example.basic.oj.leetcode.Q117;
 
 /**
- * 与Q116类似，区别在于不再是完全二叉树。
- * <p>
- * 添加了限制：你只能使用常量级额外空间。
- *
  * @author anyuan
- * @since 2021-08-22 18:57
+ * @since 2021-09-06 16:02
  */
-class Solution_harder {
+class Solution_no_extra_space {
+    // Definition for a Node.
     class Node {
         public int val;
         public Node left;
@@ -32,41 +29,46 @@ class Solution_harder {
 
     public Node connect(Node root) {
         if (root == null) {
-            return root;
+            return null;
         }
+        // 如果一个节点同时有左和右，那么左的next就是右
+        // 如果一个节点只有左，那么左的next就是当前节点的所有兄弟节点中的最左子节点
+        // 如果一个节点只有右，同上一种情况
         if (root.left != null) {
-            if (root.right != null) {
+            if (root.right !=null) {
                 root.left.next = root.right;
             } else {
-                root.left.next = getNext(root.next);
+                // 注意这里要从root.next开始找
+                root.left.next = getBrosLeftestSon(root.next);
             }
         }
         if (root.right != null) {
-            root.right.next = getNext(root.next);
+            // 注意这里要从root.next开始找
+            root.right.next = getBrosLeftestSon(root.next);
         }
-        /**
-         * 这里必须从右往左填充，因为左侧的子树填充时可能会用到右侧子树的信息
-         */
+        // 必须先填右树，因为左树中的元素找next时可能会用到右树的元素
         connect(root.right);
         connect(root.left);
         return root;
     }
 
     /**
-     * 实际上就是找到当前节点及当前节点右侧的所有节点中，最左的子树节点（也有可能左树为空，那最左的子树节点就是右树节点了）
+     * 通过current，找到current及其兄弟节点中的最左子节点
      *
-     * @param current x.root.next
+     * @param current
      * @return
      */
-    private Node getNext(Node current) {
-        while (current != null) {
+    private Node getBrosLeftestSon(Node current) {
+        while (current !=null) {
             if (current.left != null) {
                 return current.left;
-            } else if (current.right != null) {
+            }
+            if (current.right!=null) {
                 return current.right;
             }
             current = current.next;
         }
         return null;
     }
+
 }

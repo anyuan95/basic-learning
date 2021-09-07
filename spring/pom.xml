@@ -15,6 +15,7 @@
         <module>spring-web</module>
         <module>spring-batch</module>
         <module>spring-mybatis</module>
+        <module>my-spring-boot-starter</module>
     </modules>
 
     <properties>

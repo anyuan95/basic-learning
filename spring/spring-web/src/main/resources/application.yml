@@ -4,3 +4,9 @@ logging:
 spring:
   application:
     name: spring-web
+server:
+  port: 8080
+
+eyal:
+  redis:
+    username: 1
