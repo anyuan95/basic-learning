@@ -29,6 +29,15 @@ class Solution_dfs {
         return answer;
     }
 
+    /**
+     * dfs+回溯（恢复现场）
+     *
+     * @param answer
+     * @param graph
+     * @param path
+     * @param currentNode
+     * @param targetNode
+     */
     private void dfs(List<List<Integer>> answer, int[][] graph, List<Integer> path, int currentNode, int targetNode) {
         if (currentNode == targetNode) {
             answer.add(new ArrayList<>(path));
