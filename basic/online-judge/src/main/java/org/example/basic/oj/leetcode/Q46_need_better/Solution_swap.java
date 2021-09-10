@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
  * @author anyuan
  * @since 2021-08-13 17:13
  */
-class Solution {
+class Solution_swap {
 
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> answer = new ArrayList<>();
@@ -43,7 +43,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        final Solution solution = new Solution();
+        final Solution_swap solution = new Solution_swap();
         System.out.println(solution.permute(new int[]{1, 2, 3, 4}));
     }
 }
