@@ -8,12 +8,21 @@ import java.util.List;
  * @author anyuan
  * @since 2021-09-13 17:08
  */
-class Solution {
+class Solution_backtrack {
+    /**
+     * 回溯方式，实际上也可以理解为DFS方式
+     * 关键点在于：
+     * 1.for循环：路径选择器
+     * 2.if-return判断：终止器
+     *
+     * @param candidates
+     * @param target
+     * @return
+     */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         // 先剪掉大于target的部分
         Arrays.sort(candidates);
         final int l = Arrays.binarySearch(candidates, target);
-//        System.out.println(l < 0 ? ~l : l);
         final int[] range = Arrays.copyOfRange(candidates, 0, l < 0 ? ~l : l+1);
         List<List<Integer>> answer = new ArrayList<>();
         process(answer, new ArrayList<>(), range, 0, target);
@@ -31,18 +40,19 @@ class Solution {
             answer.add(new ArrayList<>(currentAnswer));
             return;
         }
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = currentIndex; i < nums.length; i++) {
             if (rest >= nums[i]) {
                 currentAnswer.add(nums[i]);
-                process(answer, currentAnswer, nums, currentIndex, rest - nums[i]);
+                process(answer, currentAnswer, nums, i, rest - nums[i]);
                 currentAnswer.remove(currentAnswer.size() - 1);
             }
         }
     }
 
     public static void main(String[] args) {
-        final Solution solution = new Solution();
+        final Solution_backtrack solution = new Solution_backtrack();
         System.out.println(solution.combinationSum(new int[]{2,3,6,7}, 7));
+        System.out.println(solution.combinationSum(new int[]{2,3,5}, 8));
 //        System.out.println(solution.combinationSum(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 12));
 //        System.out.println(solution.combinationSum(new int[]{1, 2, 3, 4, 5, 7, 8, 9, 10}, 6));
     }
