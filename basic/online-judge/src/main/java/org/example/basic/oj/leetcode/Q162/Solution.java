@@ -15,10 +15,10 @@ class Solution {
             if ((middle == 0 || nums[middle] > nums[middle - 1])
                     && (middle == n - 1 || nums[middle] > nums[middle + 1])) {
                 return middle;
-            }else if (middle == 0 || nums[middle] < nums[middle + 1]) {
+            } else if (middle == 0 || nums[middle] < nums[middle + 1]) {
                 // middle < middle+1，则最大值一定在[middle+1, right]中
                 left = middle + 1;
-            }else if (middle == n - 1 || nums[middle] > nums[middle + 1]){
+            } else if (middle == n - 1 || nums[middle] > nums[middle + 1]) {
                 // middle > middle+1，则最大值一定在[left, middle]中
                 right = middle;
             }
@@ -30,8 +30,8 @@ class Solution {
         final Solution solution = new Solution();
         System.out.println(solution.findPeakElement(new int[]{1}));
         System.out.println(solution.findPeakElement(new int[]{1, 2}));
-        System.out.println(solution.findPeakElement(new int[]{1,0,1,0,1}));
+        System.out.println(solution.findPeakElement(new int[]{1, 0, 1, 0, 1}));
         System.out.println(solution.findPeakElement(new int[]{1, 2, 3, 1}));
-        System.out.println(solution.findPeakElement(new int[]{1,2,1,3,5,6,4}));
+        System.out.println(solution.findPeakElement(new int[]{1, 2, 1, 3, 5, 6, 4}));
     }
 }
