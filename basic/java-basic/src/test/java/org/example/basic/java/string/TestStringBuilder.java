@@ -13,17 +13,5 @@ public class TestStringBuilder {
         int n = 1000;
         char c = ' ';
         final StringBuilder builder = new StringBuilder();
-
-        while (builder.length() < n) {
-
-        }
-
-        while(xstring.length<n){
-            if(xstring.length*2<n){
-                xstring = xstring.append(xstring);
-                containe;
-            }
-            xstring.append(x);
-        }
     }
 }

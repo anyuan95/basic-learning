@@ -18,6 +18,5 @@ public class TestHashMap {
         map.compute("llarao", (s, integer) -> integer == null ? 27 : integer + 1);
         map.compute("lpd", (s, integer) -> integer == null ? 27 : integer + 1);
         System.out.println(map);
-
     }
 }

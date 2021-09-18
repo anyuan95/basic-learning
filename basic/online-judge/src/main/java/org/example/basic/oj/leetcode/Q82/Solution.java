@@ -1,15 +1,11 @@
 package org.example.basic.oj.leetcode.Q82;
 
 /**
- * 删除升序链表中所有的重复元素
- * <p>
- * 是要去掉所有的重复的
- *
  * @author anyuan
- * @since 2021-08-27 17:38
+ * @since 2021-09-18 16:08
  */
 class Solution {
-    static class ListNode {
+    private static class ListNode {
         int val;
         ListNode next;
 
@@ -27,13 +23,11 @@ class Solution {
     }
 
     public ListNode deleteDuplicates(ListNode head) {
-        if (head == null) {
-            return null;
-        }
         ListNode dummy = new ListNode(), previous = dummy, current = head;
         dummy.next = head;
         while (current != null && current.next != null) {
             if (current.val == current.next.val) {
+                // 当前值和下一个值相等
                 while (current.next != null && current.val == current.next.val) {
                     current = current.next;
                 }
@@ -44,15 +38,5 @@ class Solution {
             current = current.next;
         }
         return dummy.next;
-    }
-
-    public static void main(String[] args) {
-        final Solution solution = new Solution();
-//        ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(3, new ListNode(4, new ListNode(4, new ListNode(5)))))));
-//        ListNode head = new ListNode(1,new ListNode(1,new ListNode(1,new ListNode(1,new ListNode(1,new ListNode(1,new ListNode(1)))))));
-        ListNode head = new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0)))))));
-//        ListNode head = new ListNode(1, new ListNode(1, new ListNode(1, new ListNode(1, new ListNode(1, new ListNode(2, new ListNode(2)))))));
-
-        System.out.println(solution.deleteDuplicates(head));
     }
 }
