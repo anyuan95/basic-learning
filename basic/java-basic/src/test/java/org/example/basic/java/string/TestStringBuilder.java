@@ -14,4 +14,11 @@ public class TestStringBuilder {
         char c = ' ';
         final StringBuilder builder = new StringBuilder();
     }
+
+    @Test
+    public void testNull() {
+        final StringBuilder builder = null;
+        System.out.println(builder);
+        System.out.println(new StringBuilder(null));
+    }
 }

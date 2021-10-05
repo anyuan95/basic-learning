@@ -21,6 +21,14 @@ class Solution {
      * 对于重复的元素2，在第2次遍历到元素2时，实际上只有由[[], [1]]+第一个2得到的部分，再加上第二个2得到的部分不会重复
      * 所以实际上只需要重新拼装这一部分即可。
      *
+     * 下标确定：
+     * 假如nums中前面元素生成的子集为A，当前遍历到一个新值m，则本次应该新生成的子集为[A+m]，总的子集集合为[A,A+m]；
+     * 假设现在又遇到一个m值，那么实际上现在只有A+m的部分再加上当前的m，得到的结果才会是不重复的部分。
+     * 所以可以整理得到，
+     * - 当本次遍历到的元素和上一个位置的元素相同时，本次复制的开始位置应该是上一次复制时的开始位置。
+     * - 当本次遍历到的元素和上一个位置的元素不同时，本次复制的开始位置就是0。
+     *
+     *
      * @param nums
      * @return
      */
@@ -29,23 +37,25 @@ class Solution {
         List<List<Integer>> answer = new ArrayList<>();
         answer.add(new ArrayList<>());
         final int n = nums.length;
-        int lastSize = 0;
+        // 记录上一个元素新增到answer中的子集数量
+        int lastLen = 0;
+        // 当前元素从answer中复制的开始位置
+        int start = 0;
         for (int i = 0; i < n; i++) {
             final int size = answer.size();
-            int j = 0;
             if (i > 0 && nums[i] == nums[i - 1]) {
                 // 出现重复之后，调整从answer中拷贝list开始处理的索引位置
-                j = size - lastSize;
+                start = size - lastLen;
             } else {
-                // 没出现重复元素的时候，更新出现重复元素之前的size
-                lastSize = size;
+                start = 0;
             }
-            while (j < size) {
+            for (int j = start; j < size; j++) {
                 List<Integer> temp = new ArrayList<>(answer.get(j));
                 temp.add(nums[i]);
                 answer.add(temp);
-                j++;
             }
+            // 记录当前元素新生成的answer数量
+            lastLen = answer.size() - size;
         }
         return answer;
     }
@@ -54,6 +64,7 @@ class Solution {
     public static void main(String[] args) {
         final Solution solution = new Solution();
         System.out.println(solution.subsetsWithDup(new int[]{1, 2, 2}));
+        System.out.println(solution.subsetsWithDup(new int[]{1, 1, 2, 2}));
         System.out.println(solution.subsetsWithDup(new int[]{4, 4, 4, 1, 4}));
     }
 }

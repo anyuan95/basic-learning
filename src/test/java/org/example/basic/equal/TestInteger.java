@@ -41,4 +41,11 @@ public class TestInteger {
         System.out.println(System.identityHashCode(a));
         System.out.println(a == b);
     }
+
+    @Test
+    public void e3() {
+        Object o = 1;
+        System.out.println(o.equals(1));
+
+    }
 }

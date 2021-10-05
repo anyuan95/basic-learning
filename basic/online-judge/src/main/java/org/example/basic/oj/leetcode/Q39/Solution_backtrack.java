@@ -23,6 +23,7 @@ class Solution_backtrack {
         // 先剪掉大于target的部分
         Arrays.sort(candidates);
         final int l = Arrays.binarySearch(candidates, target);
+        // 这里的操作比较难懂，因为binarySearch如果找不到的话，返回的l取反之后得到的结果，实际上是这个值应该插入的位置
         final int[] range = Arrays.copyOfRange(candidates, 0, l < 0 ? ~l : l+1);
         List<List<Integer>> answer = new ArrayList<>();
         process(answer, new ArrayList<>(), range, 0, target);
