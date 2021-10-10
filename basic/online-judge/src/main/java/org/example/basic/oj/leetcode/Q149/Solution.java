@@ -23,38 +23,26 @@ class Solution {
      */
     public int maxPoints(int[][] points) {
         // set里只保存是第几个点
-        Map<Line, HashSet<Integer>> lineMap = new HashMap<>();
+        HashSet<Line> lineSet = new HashSet<>();
         for (int fromPointIndex = 0; fromPointIndex < points.length; fromPointIndex++) {
             final int[] fromPoint = points[fromPointIndex];
             for (int toPointIndex = fromPointIndex + 1; toPointIndex < points.length; toPointIndex++) {
                 final int[] toPoint = points[toPointIndex];
-                final Line line = Line.generateLine(fromPoint, toPoint);
-                if (!lineMap.containsKey(line)) {
-                    final HashSet<Integer> pointSet = new HashSet<>();
-                    pointSet.add(fromPointIndex);
-                    pointSet.add(toPointIndex);
-                    lineMap.put(line, pointSet);
-                } else {
-                    final HashSet<Integer> pointSet = lineMap.get(line);
-                    pointSet.add(fromPointIndex);
-                    pointSet.add(toPointIndex);
-                }
+                lineSet.add(Line.generateLine(fromPoint, toPoint));
             }
         }
 
         // 然后再对照着map做一次遍历
         // 顺便找出最大值
         int maxPointsOnOneLine = 1;
-        final Set<Map.Entry<Line, HashSet<Integer>>> entries = lineMap.entrySet();
-        for (Map.Entry<Line, HashSet<Integer>> entry : entries) {
-            final Line line = entry.getKey();
-            final HashSet<Integer> pointsOnLine = entry.getValue();
-            for (int pointIndex = 0; pointIndex < points.length; pointIndex++) {
-                if (line.isInLine(points[pointIndex])) {
-                    pointsOnLine.add(pointIndex);
+        for (Line line : lineSet) {
+            int pointCountOnThisLine = 0;
+            for (int[] point : points) {
+                if (line.isInLine(point)) {
+                    pointCountOnThisLine++;
                 }
             }
-            maxPointsOnOneLine = Math.max(maxPointsOnOneLine, pointsOnLine.size());
+            maxPointsOnOneLine = Math.max(maxPointsOnOneLine, pointCountOnThisLine);
         }
         return maxPointsOnOneLine;
     }
@@ -65,13 +53,13 @@ class Solution {
      * 注意：斜截式只能表示不垂直于x轴的直线
      */
     private static class Line {
-        double k;
-        double b;
+        Fraction k;
+        Fraction b;
 
         boolean isVertical;
         int x;
 
-        public Line(double k, double b) {
+        public Line(Fraction k, Fraction b) {
             this.k = k;
             this.b = b;
             this.isVertical = false;
@@ -86,8 +74,9 @@ class Solution {
             if (point1[0] == point2[0]) {
                 return new Line(true, point1[0]);
             }
-            double k = (point2[1] - point1[1]) / 1.0 / (point2[0] - point1[0]);
-            double b = point1[1] - point1[0] * k;
+
+            Fraction k = new Fraction((point2[1] - point1[1]), (point2[0] - point1[0]));
+            Fraction b = new Fraction(point1[1], 1).sub(k.multiply(point1[0]));
             return new Line(k, b);
         }
 
@@ -95,7 +84,7 @@ class Solution {
             if (this.isVertical) {
                 return point[0] == this.x;
             } else {
-                return point[1] == this.k * point[0] + this.b;
+                return point[1] == this.k.multiply(point[0]).add(this.b).permittive();
             }
         }
 
@@ -113,10 +102,62 @@ class Solution {
         }
     }
 
+    private static class Fraction {
+        long numerator;
+        long denominator;
+
+        public Fraction(long numerator, long denominator) {
+            this.numerator = numerator;
+            this.denominator = denominator;
+            change();
+        }
+
+        public int permittive() {
+            return (int) (this.numerator / this.denominator);
+        }
+
+        private long gcd(long a, long b) {
+            long mod = a % b;
+            if (mod == 0) {
+                return b;
+            } else {
+                return gcd(b, mod);
+            }
+        }
+
+        private void change() {
+            long gcd = this.gcd(this.numerator, this.denominator);
+            this.numerator /= gcd;
+            this.denominator /= gcd;
+        }
+
+        public Fraction add(Fraction second) {
+            return new Fraction(this.numerator * second.denominator + second.numerator * this.denominator,
+                    this.denominator * second.denominator);
+        }
+
+        public Fraction sub(Fraction second) {
+            return new Fraction(this.numerator * second.denominator - second.numerator * this.denominator,
+                    this.denominator * second.denominator);
+        }
+
+        public Fraction multiply(long second) {
+            return new Fraction(this.numerator * second, this.denominator);
+        }
+
+        public Fraction multiply(Fraction second) {
+            return new Fraction(this.numerator * second.numerator,
+                    this.denominator * second.denominator);
+        }
+    }
+
     public static void main(String[] args) {
         final Solution solution = new Solution();
+//        System.out.println(solution.maxPoints(new int[][]{
+//                {0, 0}, {4, 5}, {7, 8}, {8, 9}, {5, 6}, {3, 4}, {1, 1}
+//        }));
         System.out.println(solution.maxPoints(new int[][]{
-                {0, 0}, {4, 5}, {7, 8}, {8, 9}, {5, 6}, {3, 4}, {1, 1}
+                {-6, -1}, {3, 1}, {12, 3}
         }));
     }
 }

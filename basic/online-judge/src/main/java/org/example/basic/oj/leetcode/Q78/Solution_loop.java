@@ -47,7 +47,7 @@ class Solution_loop {
         return answer;
     }
 
-    public List<List<Integer>> subsets_lookBetter(int[] nums) {
+    public List<List<Integer>> subsets_lookBetter1(int[] nums) {
         List<List<Integer>> answer = new ArrayList<>();
         List<Integer> currentAnswer = new ArrayList<>();
         final int n = nums.length;
@@ -65,7 +65,31 @@ class Solution_loop {
     }
 
     /**
-     * 思路：对于nums中的每个元素，逐个进=记录当前及之前元素能够组成的所有组合
+     * 两种look_better实际上是一样的
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> subsets_lookBetter2(int[] nums) {
+        List<List<Integer>> answer = new ArrayList<>();
+        final int n = nums.length;
+        int subSetCount = 1 << n;
+        for (int i = 0; i < subSetCount; i++) {
+            final List<Integer> currentAnswer = new ArrayList<>();
+            // 遍历二进制位
+            for (int j = 0; j < n; j++) {
+                if (((i >> j) & 1) == 1) {
+                    // 如果倒数第j位为1，则选
+                    // 这里也可以直接把j不断右移，每次直接&1就能取出最后一位了
+                    currentAnswer.add(nums[j]);
+                }
+            }
+            answer.add(currentAnswer);
+        }
+        return answer;
+    }
+
+    /**
+     * 思路：对于nums中的每个元素，逐个记录当前及之前元素能够组成的所有组合
      * 然后遍历到下一个元素时，相当于把下一个元素与之前所有结果进行一个合并操作
      *
      * @param nums
@@ -74,7 +98,6 @@ class Solution_loop {
     public List<List<Integer>> subsets_ex(int[] nums) {
         List<List<Integer>> answer = new ArrayList<>();
         answer.add(new ArrayList<>());
-        final int n = nums.length;
         for (int num : nums) {
             final int size = answer.size();
             for (int j = 0; j < size; j++) {
@@ -89,7 +112,6 @@ class Solution_loop {
     public static void main(String[] args) {
         final Solution_loop solution = new Solution_loop();
         System.out.println(solution.subsets(new int[]{1, 2, 3}));
-        System.out.println(solution.subsets_lookBetter(new int[]{1, 2, 3}));
     }
 
 }
