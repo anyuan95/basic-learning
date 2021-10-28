@@ -1,8 +1,5 @@
 package org.example.basic.oj.leetcode.Q212;
 
-import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
-import org.example.basic.oj.zuo.tree.TreeNode;
-
 import java.util.ArrayList;
 import java.util.List;
 
