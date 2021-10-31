@@ -15,7 +15,7 @@ class Solution {
         stack.push(nums2[0]);
         for (int i = 1; i < nums2.length; i++) {
             while (!stack.isEmpty() && nums2[i] > stack.peek()) {
-                // 如果当前元素大于栈顶元素，则进行记录
+                // 如果当前元素大于栈顶元素，则弹出，并进行记录
                 map.put(stack.pop(), nums2[i]);
             }
             stack.push(nums2[i]);
