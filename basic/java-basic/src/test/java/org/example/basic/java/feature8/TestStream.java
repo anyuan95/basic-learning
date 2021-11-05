@@ -187,4 +187,10 @@ public class TestStream {
         System.out.println(userStream.count());
         System.out.println(users);
     }
+
+    @Test
+    public void testToSet() {
+        System.out.println(Lists.newArrayList(1, 2, 3, 4, 5).stream().collect(Collectors.toSet()));
+        System.out.println(Lists.newArrayList().stream().collect(Collectors.toSet()));
+    }
 }
