@@ -32,6 +32,12 @@ class Solution {
         return (int) Math.sqrt(n);
     }
 
+    /**
+     * 题目给定的范围是1-10^9，On^2一定TLE
+     * 
+     * @param n
+     * @return
+     */
     public int bulbSwitch_force(int n) {
         Boolean[] bulbs = new Boolean[n + 1];
         Arrays.fill(bulbs, false);
