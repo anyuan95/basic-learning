@@ -7,6 +7,11 @@ spring:
 server:
   port: 8080
 
+
 eyal:
   redis:
     username: 1
+
+springfox:
+  documentation:
+    enabled: false

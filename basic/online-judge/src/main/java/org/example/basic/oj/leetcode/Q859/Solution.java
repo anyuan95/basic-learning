@@ -33,5 +33,6 @@ class Solution {
         if (diffIndex1 == -1 && diffIndex2 == -1) {
             return hasRepeatChar;
         }
+        return true;
     }
 }
