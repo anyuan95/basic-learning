@@ -41,21 +41,10 @@ class Solution {
     private int sum(TreeNode node) {
         if (node == null) {
             return 0;
-        } else if (node.left == null && node.right == null) {
-            return node.val;
-        } else if (node.left == null) {
-            final int rSum = sum(node.right);
-            tilt += rSum;
-            return rSum + node.val;
-        } else if (node.right == null) {
-            final int lSum = sum(node.left);
-            tilt += lSum;
-            return lSum + node.val;
-        } else {
-            final int lSum = sum(node.left);
-            final int rSum = sum(node.right);
-            tilt += Math.abs(lSum - rSum);
-            return lSum + rSum + node.val;
         }
+        final int left = sum(node.left);
+        final int right = sum(node.right);
+        tilt += Math.abs(left - right);
+        return node.val + left + right;
     }
 }

@@ -1,105 +1,93 @@
 package org.example.basic.oj.leetcode.Q391;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.BitSet;
+import java.util.List;
 
 /**
  * @author anyuan
- * @date 2021-11-16 14:56
+ * @since 2021-11-16 23:33
  */
 class Solution {
-    /**
-     * 1 <= rectangles.length <= 2 * 10^4
-     * rectangles[i].length == 4
-     * -10^5 <= xi, yi, ai, bi <= 10^5
-     *
-     * rectangles[i] = [xi, yi, ai, bi]
-     * 这个矩形的左下顶点是 (xi, yi) ，右上顶点是 (ai, bi) 。
-     * == [0],[1]  [2],[3]
-     * 那么左上顶点是（xi, bi），右下顶点是（ai, yi）。
-     * == [0],[3]  [2],[1]
-     *
-     * 先试着写一个最暴力的方法，
-     * 先把最左上左下右上右下的位置都找到，
-     * 然后做一个能够涵盖所有点的数组。
-     * 给定的矩形覆盖的格子的值都加一，
-     * 如果有值为2的格子，就是有叠加的，直接返回；
-     * 如果一直没有值为2的格子，就全部填完，然后遍历一遍看有没有0，有0就是有空隙；
-     *
-     * 1.二维数组：还没等到TLE，就MLE了。。。
-     * 2.bitSet数组：这回不MLE了，变TLE了。。。
-     *
-     * @param rectangles
-     * @return
-     */
     public boolean isRectangleCover(int[][] rectangles) {
-        int leftestX = rectangles[0][0],
-                rightestX = rectangles[0][2],
-                highestY = rectangles[0][3],
-                lowestY = rectangles[0][1];
-        final int n = rectangles.length;
-        for (int i = 1; i < n; i++) {
-            int[] currentRectangle = rectangles[i];
-            leftestX = Math.min(leftestX, currentRectangle[0]);
-            rightestX = Math.max(rightestX, currentRectangle[2]);
-            highestY = Math.max(highestY, currentRectangle[3]);
-            lowestY = Math.min(lowestY, currentRectangle[1]);
+        int n = rectangles.length;
+        final int[][] rt = new int[n * 2][4];
+        // 首先转换原有的矩形坐标数组，转换成左右两侧竖直线的信息
+        // [x坐标，竖直线低点y坐标，竖直线高点y坐标，1表示矩形左侧/2表示矩形右侧]
+        for (int i = 0, index = 0; i < n; i++) {
+            int[] curr = rectangles[i];
+            rt[index++] = new int[]{curr[0], curr[1], curr[3], 1};
+            rt[index++] = new int[]{curr[2], curr[1], curr[3], -1};
         }
-        // m*n的矩形，切分成1*1的小正方形，实际上是(m-1)*(n-1)个
-        // 做一个映射关系，节点x,y映射的矩形是x+1,y+1
-        // leftestX对应的record下标是0，highestY对应的record下标也是0
-        BitSet[] record = new BitSet[highestY - lowestY];
-//        boolean[][] record = new boolean[highestY - lowestY][rightestX - leftestX];
-        for (int[] currentRectangle : rectangles) {
-            final int left = currentRectangle[0];
-            final int down = currentRectangle[1];
-            final int right = currentRectangle[2];
-            final int top = currentRectangle[3];
-            // 然后把这个矩形里的所有小方块都填写到record里
-//            for (int j = top; j > down; j--) {
-//                for (int k = left; k < right; k++) {
-//                    if (record[highestY - j][k - leftestX]) {
-//                        return false;
-//                    } else {
-//                        record[highestY - j][k - leftestX] = true;
-//                    }
-//                }
-//            }
-            for (int j = top; j > down; j--) {
-                if (record[highestY - j] == null) {
-                    record[highestY - j] = new BitSet();
-                }
-                BitSet curr = record[highestY - j];
-                for (int k = left; k < right; k++) {
-                    if (curr.get(k - leftestX)) {
+        // 按照横坐标和低点排序
+        Arrays.sort(rt, (o1, o2) -> {
+            if (o1[0] == o2[0]) {
+                return o1[1] - o2[1];
+            }
+            return o1[0] - o2[0];
+        });
+
+        // 由于是n个矩形，所以一定会有2n个竖线
+        n*=2;
+        // 做两个列表，分别保存矩形左侧的线和矩形右侧的线
+        final List<int[]> left = new ArrayList<>(), right = new ArrayList<>();
+        int l = 0, r= 0;
+        while (l < n) {
+            r = l;
+            left.clear();
+            right.clear();
+            // 找到横坐标相同的部分
+            while (r < n && rt[l][0] == rt[r][0]) {
+                r++;
+            }
+            for (int i = l; i < r; i++) {
+                int[] curr = new int[]{rt[i][1],rt[i][2]};
+                // 确定当前竖线应该放在哪个列表里
+                List<int[]> targetList = rt[i][3] == 1 ? left : right;
+                if (targetList.isEmpty()) {
+                    targetList.add(curr);
+                } else {
+                    // 找到同一侧的上一个竖线，将两个竖线做比较
+                    int[] prev = targetList.get(targetList.size() - 1);
+                    if (curr[0] < prev[1]) {
+                        // 有相交部分，就一定是有重叠
                         return false;
+                    } else if (curr[0] == prev[1]) {
+                        // 能连上，那就加到前一个的上边
+                        prev[1] = curr[1];
                     } else {
-                        curr.set(k - leftestX);
+                        // 连不上，说明这两段中间有间隔，都要留着
+                        targetList.add(curr);
                     }
                 }
             }
-        }
-//        for (boolean[] booleans : record) {
-//            for (boolean aBoolean : booleans) {
-//                if (!aBoolean) {
-//                    return false;
-//                }
-//            }
-//        }
-        for (BitSet bitSet : record) {
-            for (int i = 0; i < rightestX - leftestX; i++) {
-                if (!bitSet.get(i)) {
+            if (l > 0 && r < n) {
+                // 说明不是最两侧的竖线
+                // 由于所有能合并的连着的线我们都合并了，所以两侧的线一定得是一样多
+                if (left.size() != right.size()) {
+                    return false;
+                }
+                // 而且两侧的线一定都得一样长
+                for (int j = 0; j < left.size(); j++) {
+                    if (left.get(j)[0] != right.get(j)[0] || left.get(j)[1] != right.get(j)[1]) {
+                        return false;
+                    }
+                }
+            } else {
+                // 否则就是最两侧的线
+                // 首先由于前边是放的x坐标一样的，所以不可能有两侧的线
+                // 然后如果这个线是某一侧最边上的线，那么必须是能够连上成整个一条线的
+                if (left.size() + right.size() != 1) {
                     return false;
                 }
             }
+            l = r;
         }
         return true;
     }
 
     public static void main(String[] args) {
         final Solution solution = new Solution();
-//        System.out.println(solution.isRectangleCover(new int[][]{{1, 1, 3, 3}, {3, 1, 4, 2}, {3, 2, 4, 4}, {1, 3, 2, 4}, {2, 3, 3, 4}}));
-//        System.out.println(solution.isRectangleCover(new int[][]{{1, 1, 3, 3}, {3, 1, 4, 2}, {1, 3, 2, 4}, {2, 3, 3, 4}}));
-        System.out.println(solution.isRectangleCover(new int[][]{{0,0,4,1},{0,0,4,1}}));
+        System.out.println(solution.isRectangleCover(new int[][]{{1, 1, 3, 3}, {3, 1, 4, 2}, {3, 2, 4, 4}, {1, 3, 2, 4}, {2, 3, 3, 4}}));
     }
 }
