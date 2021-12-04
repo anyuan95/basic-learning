@@ -33,8 +33,16 @@ public class ClassPrinter extends ClassVisitor {
 
     @Override
     public void visitEnd() {
-
         System.out.println("}");
+    }
+
+    public static void print(Class<?> clazz) {
+        final ClassPrinter classPrinter = new ClassPrinter();
+        final ClassLoader classLoader = clazz.getClassLoader();
+//        classLoader.loadClass()
+//        new ClassReader()
+
+
     }
 
     public static void main(String[] args) throws IOException {

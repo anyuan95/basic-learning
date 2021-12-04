@@ -1,5 +1,6 @@
 package org.example.basic.java.feature8;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -192,5 +193,16 @@ public class TestStream {
     public void testToSet() {
         System.out.println(Lists.newArrayList(1, 2, 3, 4, 5).stream().collect(Collectors.toSet()));
         System.out.println(Lists.newArrayList().stream().collect(Collectors.toSet()));
+    }
+
+    @Test
+    public void testNull() {
+//        final List<List<List<List<List<Integer>>>>> list = Arrays.asList(Arrays.asList(Arrays.asList(Arrays.asList(Arrays.asList(1)))));
+
+        // ArrayIndexOutOfBoundsException
+//        System.out.println(Optional.ofNullable(Arrays.asList()).map(l -> l.get(0)).orElse(null));
+        System.out.println(Optional.ofNullable(Arrays.asList())
+                .filter(CollUtil::isNotEmpty)
+                .map(l -> l.get(0)).orElse(null));
     }
 }
