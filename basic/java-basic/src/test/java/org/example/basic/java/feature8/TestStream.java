@@ -76,9 +76,8 @@ public class TestStream {
         // flatMap TODO
     }
 
-    @Test
-    public void testCollectors() {
-        final List<User> users = Lists.newArrayList(
+    private List<User> users() {
+        return Lists.newArrayList(
                 User.builder().id(1L).firstName("John").lastName("Smith").gender(Gender.MALE).age(25).build(),
                 User.builder().id(2L).firstName("Jane").lastName("Smith").gender(Gender.FEMALE).age(17).build(),
                 User.builder().id(3L).firstName("Hawking").lastName("Stephen").gender(Gender.MALE).age(28).build(),
@@ -86,6 +85,11 @@ public class TestStream {
                 User.builder().id(5L).firstName("Rose").lastName("Stephen").gender(Gender.OTHER).age(41).build(),
                 User.builder().id(6L).firstName("Arthur").lastName("Pandragon").gender(Gender.FEMALE).age(16).build()
         );
+    }
+
+    @Test
+    public void testCollectors() {
+        final List<User> users = users();
         // toSet
         final Set<User> userSet = users.stream().collect(Collectors.toSet());
         System.out.println(userSet.getClass());
@@ -193,6 +197,16 @@ public class TestStream {
     public void testToSet() {
         System.out.println(Lists.newArrayList(1, 2, 3, 4, 5).stream().collect(Collectors.toSet()));
         System.out.println(Lists.newArrayList().stream().collect(Collectors.toSet()));
+    }
+
+    @Test
+    public void testCollect() {
+        final List<User> users = users();
+
+        final List<User> collect = users.stream()
+                .sorted(Comparator.comparing(User::getAge, Comparator.nullsFirst(Comparator.naturalOrder())))
+                .collect(Collectors.toList());
+
     }
 
     @Test
