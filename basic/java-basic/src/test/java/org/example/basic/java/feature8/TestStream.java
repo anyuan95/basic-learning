@@ -8,7 +8,16 @@ import org.example.basic.java.feature8.model.Gender;
 import org.example.basic.java.feature8.model.User;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.IntSummaryStatistics;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -202,10 +211,14 @@ public class TestStream {
     @Test
     public void testCollect() {
         final List<User> users = users();
+        users.add(new User(1000L));
 
-        final List<User> collect = users.stream()
+        final List<User> sortedUsers = users.stream()
                 .sorted(Comparator.comparing(User::getAge, Comparator.nullsFirst(Comparator.naturalOrder())))
                 .collect(Collectors.toList());
+        System.out.println(sortedUsers);
+
+        System.out.println(users.stream().sorted(Comparator.comparing(User::getAge, Comparator.nullsFirst(Comparator.reverseOrder()))).collect(Collectors.toList()));
 
     }
 
