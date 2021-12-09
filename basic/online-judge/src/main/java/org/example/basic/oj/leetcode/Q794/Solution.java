@@ -17,30 +17,46 @@ class Solution {
      * @return
      */
     public boolean validTicTacToe(String[] board) {
-        // 考虑无效的几种情况
-        // 1.初始状态已经有一方胜出
-        // 2.不满足1的前提下，格子已经满了
-        // 3.两种字符数量相差大于1
+        // 考虑先后手的问题，X一定先手，即x一定大于等于o
+        // 从另一方面考虑：
+        // 如果X赢，则最后一手一定是X，x-o=1
+        // 如果O赢，则最后一手一定是O，X=O
+
+        // 首先判断是否X-O在0,1之间
         int xCount = 0, oCount = 0;
         char[][] chars = new char[3][3];
         for (int i = 0; i < board.length; i++) {
             chars[i] = board[i].toCharArray();
         }
         for (int i = 0; i < 3; i++) {
-            if (chars[i][0] == chars[i][1] && chars[i][1] == chars[i][2]) {
-                return false;
+            for (int j = 0; j < 3; j++) {
+                if (chars[i][j] == 'X') {
+                    xCount++;
+                } else if (chars[i][j] == 'O') {
+                    oCount++;
+                }
             }
         }
-        for (int j = 0; j < 3; j++) {
-            if (chars[0][j] == chars[1][j] && chars[1][j] == chars[2][j]) {
-                return false;
-            }
-        }
-        if ((chars[0][0] == chars[1][1] && chars[1][1] == chars[2][2]) || (chars[0][0] == chars[1][1] && chars[1][1] == chars[2][2])) {
-
+        if (xCount - oCount != 0 && xCount - oCount != 1) {
+            return false;
         }
 
+        // 然后判断，如果一方赢，是否对
+        final boolean xWin = check(chars, 'X'), oWin = check(chars, 'O');
+        if (xWin && xCount - oCount != 1) return false;
+        if (oWin && xCount != oCount) return false;
+        if (xWin && oWin) return false;
+        return true;
+    }
 
-
+    private boolean check(char[][] chars, char c) {
+        for (int i = 0; i < 3; i++) {
+            if (chars[0][i] == c && chars[1][i] == c && chars[2][i] == c) return true;
+            if (chars[i][0] == c && chars[i][1] == c && chars[i][2] == c) return true;
+        }
+        if ((chars[0][0] == c && chars[1][1] == c && chars[2][2] == c) || (chars[0][2] == c && chars[1][1] == c && chars[2][0] == c)) {
+            return true;
+        }
+        return false;
     }
 }
