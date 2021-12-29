@@ -1,11 +1,13 @@
 package org.example.json;
 
+import com.alibaba.fastjson.JSONPath;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -24,4 +26,5 @@ public class TestJson {
         final NumberFormat numberInstance = DecimalFormat.getNumberInstance(Locale.getDefault());
         System.out.println(numberInstance.format(aDouble));
     }
+
 }

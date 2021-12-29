@@ -1,7 +1,5 @@
 package org.example.basic.oj.leetcode.Q90;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +17,7 @@ class Solution_1003 {
         for (int i = 0; i < nums.length; i++) {
             final int size = answer.size();
             int start = 0;
-            if (i > 0 && nums[i] == nums[i-1]) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 start = size - lastSize;
             } else {
                 lastSize = size;

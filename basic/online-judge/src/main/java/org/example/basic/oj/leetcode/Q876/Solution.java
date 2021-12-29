@@ -1,13 +1,10 @@
 package org.example.basic.oj.leetcode.Q876;
 
-import lombok.ToString;
-
 /**
  * @author anyuan
  * @since 2021-08-17 09:56
  */
 class Solution {
-    @ToString
     static class ListNode {
         int val;
         ListNode next;
