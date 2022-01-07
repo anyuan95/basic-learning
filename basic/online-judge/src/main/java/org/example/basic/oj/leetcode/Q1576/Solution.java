@@ -9,13 +9,14 @@ class Solution {
         s = 'a' + s + 'a';
         final char[] chars = s.toCharArray();
         final int n = chars.length;
-        for (int i = 1; i < n-1; i++) {
+        for (int i = 1; i < n - 1; i++) {
             if (chars[i] == '?') {
-                chars[i] = chars[i-1]-'a' + 1;
+                chars[i] = (char) ((chars[i - 1] - 'a' + 1) % 26 + 'a');
+                if (chars[i] == chars[i+1]) {
+                    chars[i] = (char) ((chars[i + 1] - 'a' + 1) % 26 + 'a');
+                }
             }
         }
-
-
-        return new String(chars, 1, n-2);
+        return new String(chars, 1, n - 2);
     }
 }
