@@ -23,6 +23,7 @@
     <!--导入属性配置 -->
     <context id="default" targetRuntime="MyBatis3">
 
+        <!-- https://github.com/itfsw/mybatis-generator-plugin -->
         <!-- 插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>
         <!-- 查询单条数据插件 -->
@@ -37,7 +38,7 @@
         <!-- Example Criteria 增强插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.ExampleEnhancedPlugin">
             <!-- 是否支持已经过时的andIf方法（推荐使用when代替），默认支持 -->
-            <property name="enableAndIf" value="true"/>
+            <property name="enableAndIf" value="false"/>
         </plugin>
         <!-- 批量插入插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin">
@@ -79,15 +80,15 @@
 
         <!--jdbc的数据库连接 -->
         <jdbcConnection driverClass="${driver}" connectionURL="${url}" userId="${username}" password="${password}" />
-<!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
-<!--                        connectionURL="jdbc:mysql://10.48.24.9:5002/ci_baseapi?characterEncoding=utf8"-->
-<!--                        userId="ci_baseapi"-->
-<!--                        password="GPnZiwkspoId1k">-->
-<!--        </jdbcConnection>-->
+        <!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+        <!--                        connectionURL="jdbc:mysql://10.48.24.9:5002/ci_baseapi?characterEncoding=utf8"-->
+        <!--                        userId="ci_baseapi"-->
+        <!--                        password="GPnZiwkspoId1k">-->
+        <!--        </jdbcConnection>-->
         <!-- Model模型生成器,用来生成含有主键key的类，记录类 以及查询Example类
             targetPackage     指定生成的model生成所在的包名
             targetProject     指定在该项目下所在的路径  -->
-        <javaModelGenerator targetPackage="org.example.spring.mybatis.generator.dao.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="org.example.spring.mybatis.dao.model" targetProject="src/main/java">
             <!-- 是否对model添加 构造函数 -->
             <property name="constructorBased" value="true"/>
             <!-- 给Model添加一个父类 -->
@@ -99,14 +100,14 @@
             type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
             type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
             type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口 -->
-        <javaClientGenerator targetPackage="org.example.spring.mybatis.generator.dao.mapper" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="org.example.spring.mybatis.dao.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
         <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 要自动生成的表 +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
         <table tableName="t_student">
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
             <!-- 这个优先级最高，会忽略searchString、replaceString的配置 -->
-<!--            <property name="tableOverride" value="Student"/>-->
+            <!--            <property name="tableOverride" value="Student"/>-->
         </table>
     </context>
 </generatorConfiguration>

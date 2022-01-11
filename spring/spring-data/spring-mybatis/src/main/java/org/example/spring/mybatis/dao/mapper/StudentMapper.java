@@ -1,9 +1,10 @@
-package org.example.spring.mybatis.generator.dao.mapper;
+package org.example.spring.mybatis.dao.mapper;
+
+import org.apache.ibatis.annotations.Param;
+import org.example.spring.mybatis.dao.model.Student;
+import org.example.spring.mybatis.dao.model.StudentExample;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
-import org.example.spring.mybatis.generator.dao.model.Student;
-import org.example.spring.mybatis.generator.dao.model.StudentExample;
 
 public interface StudentMapper {
     long countByExample(StudentExample example);
@@ -18,13 +19,13 @@ public interface StudentMapper {
 
     Student selectOneByExample(StudentExample example);
 
-    Student selectOneByExampleSelective(@Param("example") StudentExample example, @Param("selective") Student.Column ... selective);
+    Student selectOneByExampleSelective(@Param("example") StudentExample example, @Param("selective") Student.Column... selective);
 
-    List<Student> selectByExampleSelective(@Param("example") StudentExample example, @Param("selective") Student.Column ... selective);
+    List<Student> selectByExampleSelective(@Param("example") StudentExample example, @Param("selective") Student.Column... selective);
 
     List<Student> selectByExample(StudentExample example);
 
-    Student selectByPrimaryKeySelective(@Param("id") Integer id, @Param("selective") Student.Column ... selective);
+    Student selectByPrimaryKeySelective(@Param("id") Integer id, @Param("selective") Student.Column... selective);
 
     Student selectByPrimaryKey(Integer id);
 
@@ -38,5 +39,5 @@ public interface StudentMapper {
 
     int batchInsert(@Param("list") List<Student> list);
 
-    int batchInsertSelective(@Param("list") List<Student> list, @Param("selective") Student.Column ... selective);
+    int batchInsertSelective(@Param("list") List<Student> list, @Param("selective") Student.Column... selective);
 }

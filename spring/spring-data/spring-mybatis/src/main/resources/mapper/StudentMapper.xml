@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.spring.mybatis.generator.dao.mapper.StudentMapper">
-  <resultMap id="BasePropertyResultMap" type="org.example.spring.mybatis.generator.dao.model.Student">
+<mapper namespace="org.example.spring.mybatis.dao.mapper.StudentMapper">
+  <resultMap id="BasePropertyResultMap" type="org.example.spring.mybatis.dao.model.Student">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="class_id" jdbcType="INTEGER" property="classId" />
     <result column="teachers" jdbcType="VARCHAR" property="teachers" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <resultMap id="BaseResultMap" type="org.example.spring.mybatis.generator.dao.model.Student">
+  <resultMap id="BaseResultMap" type="org.example.spring.mybatis.dao.model.Student">
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="age" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="class_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="teachers" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -76,9 +80,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, age, class_id, teachers
+    id, name, age, class_id, teachers, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="org.example.spring.mybatis.generator.dao.model.StudentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.example.spring.mybatis.dao.model.StudentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -156,19 +160,21 @@
     delete from t_student
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="org.example.spring.mybatis.generator.dao.model.StudentExample">
+  <delete id="deleteByExample" parameterType="org.example.spring.mybatis.dao.model.StudentExample">
     delete from t_student
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.example.spring.mybatis.generator.dao.model.Student">
+  <insert id="insert" parameterType="org.example.spring.mybatis.dao.model.Student">
     insert into t_student (id, name, age, 
-      class_id, teachers)
+      class_id, teachers, create_time, 
+      update_time)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
-      #{classId,jdbcType=INTEGER}, #{teachers,jdbcType=VARCHAR})
+      #{classId,jdbcType=INTEGER}, #{teachers,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="org.example.spring.mybatis.generator.dao.model.Student">
+  <insert id="insertSelective" parameterType="org.example.spring.mybatis.dao.model.Student">
     insert into t_student
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -185,6 +191,12 @@
       </if>
       <if test="teachers != null">
         teachers,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -203,9 +215,15 @@
       <if test="teachers != null">
         #{teachers,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.example.spring.mybatis.generator.dao.model.StudentExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.example.spring.mybatis.dao.model.StudentExample" resultType="java.lang.Long">
     select count(*) from t_student
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -229,6 +247,12 @@
       <if test="record.teachers != null">
         teachers = #{record.teachers,jdbcType=VARCHAR},
       </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -240,12 +264,14 @@
       name = #{record.name,jdbcType=VARCHAR},
       age = #{record.age,jdbcType=INTEGER},
       class_id = #{record.classId,jdbcType=INTEGER},
-      teachers = #{record.teachers,jdbcType=VARCHAR}
+      teachers = #{record.teachers,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.example.spring.mybatis.generator.dao.model.Student">
+  <update id="updateByPrimaryKeySelective" parameterType="org.example.spring.mybatis.dao.model.Student">
     update t_student
     <set>
       <if test="name != null">
@@ -260,18 +286,26 @@
       <if test="teachers != null">
         teachers = #{teachers,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.example.spring.mybatis.generator.dao.model.Student">
+  <update id="updateByPrimaryKey" parameterType="org.example.spring.mybatis.dao.model.Student">
     update t_student
     set name = #{name,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       class_id = #{classId,jdbcType=INTEGER},
-      teachers = #{teachers,jdbcType=VARCHAR}
+      teachers = #{teachers,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectOneByExample" parameterType="org.example.spring.mybatis.generator.dao.model.StudentExample" resultMap="BaseResultMap">
+  <select id="selectOneByExample" parameterType="org.example.spring.mybatis.dao.model.StudentExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_student
@@ -306,11 +340,12 @@
   </select>
   <insert id="batchInsert" parameterType="map">
     insert into t_student
-    (id, name, age, class_id, teachers)
+    (id, name, age, class_id, teachers, create_time, update_time)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.id,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR}, #{item.age,jdbcType=INTEGER}, 
-        #{item.classId,jdbcType=INTEGER}, #{item.teachers,jdbcType=VARCHAR})
+        #{item.classId,jdbcType=INTEGER}, #{item.teachers,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.updateTime,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
   <insert id="batchInsertSelective" parameterType="map">
@@ -337,6 +372,12 @@
         </if>
         <if test="'teachers'.toString() == column.value">
           #{item.teachers,jdbcType=VARCHAR}
+        </if>
+        <if test="'create_time'.toString() == column.value">
+          #{item.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'update_time'.toString() == column.value">
+          #{item.updateTime,jdbcType=TIMESTAMP}
         </if>
       </foreach>
       )

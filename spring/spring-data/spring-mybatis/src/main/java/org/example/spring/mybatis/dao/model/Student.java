@@ -1,8 +1,10 @@
-package org.example.spring.mybatis.generator.dao.model;
+package org.example.spring.mybatis.dao.model;
+
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import lombok.Data;
+import java.util.Date;
 
 @Data
 public class Student {
@@ -16,20 +18,26 @@ public class Student {
 
     private String teachers;
 
-    public Student(Integer id, String name, Integer age, Integer classId, String teachers) {
+    private Date createTime;
+
+    private Date updateTime;
+
+    public Student(Integer id, String name, Integer age, Integer classId, String teachers, Date createTime, Date updateTime) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.classId = classId;
         this.teachers = teachers;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
     }
 
     public Student() {
         super();
     }
 
-    public static Student.Builder builder() {
-        return new Student.Builder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public static class Builder {
@@ -64,6 +72,16 @@ public class Student {
             return this;
         }
 
+        public Builder createTime(Date createTime) {
+            obj.setCreateTime(createTime);
+            return this;
+        }
+
+        public Builder updateTime(Date updateTime) {
+            obj.setUpdateTime(updateTime);
+            return this;
+        }
+
         public Student build() {
             return this.obj;
         }
@@ -74,7 +92,9 @@ public class Student {
         name("name", "name", "VARCHAR", false),
         age("age", "age", "INTEGER", false),
         classId("class_id", "classId", "INTEGER", false),
-        teachers("teachers", "teachers", "VARCHAR", false);
+        teachers("teachers", "teachers", "VARCHAR", false),
+        createTime("create_time", "createTime", "TIMESTAMP", false),
+        updateTime("update_time", "updateTime", "TIMESTAMP", false);
 
         private static final String BEGINNING_DELIMITER = "\"";
 

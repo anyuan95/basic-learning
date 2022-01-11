@@ -23,10 +23,11 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
-        <guava.version>30.0-jre</guava.version>
-        <hutool.version>5.7.4</hutool.version>
-        <jol-cli.version>0.15</jol-cli.version>
+        <guava.version>31.0.1-jre</guava.version>
+        <hutool.version>5.7.18</hutool.version>
+        <jol-cli.version>0.16</jol-cli.version>
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+        <mybatis-spring-boot-starter.version>2.1.4</mybatis-spring-boot-starter.version>
     </properties>
 
     <parent>
@@ -49,6 +50,11 @@
                 <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>1.2.6</version>
@@ -58,7 +64,6 @@
                 <artifactId>HikariCP</artifactId>
                 <version>4.0.3</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -72,10 +77,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
