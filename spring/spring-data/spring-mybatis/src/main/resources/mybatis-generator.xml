@@ -23,8 +23,10 @@
     <!--导入属性配置 -->
     <context id="default" targetRuntime="MyBatis3">
 
-        <!-- https://github.com/itfsw/mybatis-generator-plugin -->
         <!-- 插件 -->
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <!-- https://github.com/itfsw/mybatis-generator-plugin -->
         <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>
         <!-- 查询单条数据插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin"/>
