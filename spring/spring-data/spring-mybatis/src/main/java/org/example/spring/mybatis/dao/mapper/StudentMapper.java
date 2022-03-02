@@ -40,4 +40,6 @@ public interface StudentMapper {
     int batchInsert(@Param("list") List<Student> list);
 
     int batchInsertSelective(@Param("list") List<Student> list, @Param("selective") Student.Column... selective);
+
+    Student tryUsingSingleParamWithoutUsingAnnotation(Integer id);
 }

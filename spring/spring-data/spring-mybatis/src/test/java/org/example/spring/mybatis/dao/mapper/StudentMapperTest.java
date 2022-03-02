@@ -129,4 +129,9 @@ class StudentMapperTest {
     @Test
     void batchInsertSelective() {
     }
+
+    @Test
+    void testTryUsingSingleParamWithoutUsingAnnotation() {
+        System.out.println(studentMapper.tryUsingSingleParamWithoutUsingAnnotation(1));
+    }
 }
