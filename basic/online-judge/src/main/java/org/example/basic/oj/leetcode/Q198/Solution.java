@@ -5,7 +5,7 @@ package org.example.basic.oj.leetcode.Q198;
  * @since 2021-08-24 18:08
  */
 class Solution {
-    public int rob(int[] nums) {
+    public int _rob(int[] nums) {
         if (nums.length == 1) {
             return nums[0];
         }
@@ -26,10 +26,29 @@ class Solution {
         return dp[nums.length - 1];
     }
 
+    /**
+     * 空间优化
+     *
+     * @param nums
+     * @return
+     */
+    public int rob(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int first = nums[0], second = Math.max(first, nums[1]);
+        for (int i = 2; i < nums.length; i++) {
+            int temp = Math.max(first + nums[i], second);
+            first = second;
+            second = temp;
+        }
+        return second;
+    }
+
     public static void main(String[] args) {
         final Solution solution = new Solution();
-        System.out.println(solution.rob(new int[]{2,7,9,3,1}));
+        System.out.println(solution.rob(new int[]{2, 7, 9, 3, 1}));
         System.out.println(solution.rob(new int[]{1}));
-        System.out.println(solution.rob(new int[]{1,2}));
+        System.out.println(solution.rob(new int[]{1, 2}));
     }
 }
