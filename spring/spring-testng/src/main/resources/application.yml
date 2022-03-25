@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: prod
+
+---
+spring:
+  profiles: prod
+ones:
+  url: http://ones.vip.sankuai.com
+  token: ZXAud2FpbWFpOmVwLndhaW1haV9vbmVz
+
+---
+spring:
+  profiles: staging
+ones:
+#  url: http://10.42.238.40:8090
+  url: http://10.188.140.242:8090
+  token: ZXAud2FpbWFpOmVwLndhaW1haV9vbmVz
+
+---
+spring:
+  profiles: test
+ones:
+  url: http://10.24.202.200:8090
+  token: ZXAud2FpbWFpOmVwLndhaW1haV9vbmVz
+
