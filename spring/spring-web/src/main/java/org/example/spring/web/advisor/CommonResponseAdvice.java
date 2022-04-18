@@ -29,7 +29,7 @@ public class CommonResponseAdvice implements ResponseBodyAdvice<Object> {
     }
 
     @Override
-    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
+    public Response<Object> beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         final Response<Object> packedResponse = Response.ofSuccess(body);
         final RequestAttributes currentRequestAttributes = RequestContextHolder.currentRequestAttributes();

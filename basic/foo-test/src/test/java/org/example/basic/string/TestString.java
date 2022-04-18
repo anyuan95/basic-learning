@@ -16,6 +16,22 @@ public class TestString {
     }
 
     @Test
+    public void testEquals1() {
+        final String s2 = new StringBuilder().append("StringTest").toString();
+        System.out.println(s2.intern() == s2);
+        final String s1 = new StringBuilder().append("String").append("Test").toString();
+        System.out.println(s1.intern() == s1);
+    }
+
+    @Test
+    public void testEquals2() {
+        final String s1 = new StringBuilder().append("String").append("Test").toString();
+        System.out.println(s1.intern() == s1);
+        final String s2 = new StringBuilder().append("StringTest").toString();
+        System.out.println(s2.intern() == s2);
+    }
+
+    @Test
     public void testDisOrder() {
         char[] chars2 = {'a', 'b', 'c'};
         char[] chars6 = {'m', 'n', 'o'};

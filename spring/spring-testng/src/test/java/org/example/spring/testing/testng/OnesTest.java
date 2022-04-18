@@ -37,6 +37,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -574,6 +575,24 @@ public class OnesTest extends AbstractTestNGSpringContextTests {
         }
     }
 
+    // TODO 尝试通过修改state值的方式进行需求状态流转
+//    private boolean updateOnesIssueStatus(Long reqId, Long issueId, String state, String ssoId, String issueType) {
+//        Map<String, Object> requirementMap = new HashMap<String, Object>();
+//        RequirementAccept requirment = getRequirment(reqId);
+//        requirementMap.put("type", issueType);
+//        requirementMap.put("projectId", requirment.getProjectId());
+//        requirementMap.put("name", requirment.getRequirementName());
+//        requirementMap.put("desc", requirment.getRequirementDescription());
+//        requirementMap.put("priority", requirment.getRequirementPriority());
+//        requirementMap.put("state", state);
+//        if ("DEVTASK".equals(issueType)) {
+//            TaskInfo taskInfoByTaskId = taskInfoService.getTaskInfoByTaskId(issueId);
+//            requirementMap.put("state", OnesApiConstants.ONES_DEVTASK_STATUS.get(state));
+//            requirementMap.put("name", taskInfoByTaskId.getTaskName());
+//        }
+//        boolean isUpdateRemoteState = updateIssue(ssoId,requirment,issueId,requirementMap);
+//        return isUpdateRemoteState;
+//    }
 
     public static void main(String[] args) {
         String slice = "技术主R(单选)";
