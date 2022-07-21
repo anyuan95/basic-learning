@@ -65,6 +65,12 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.70</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-client</artifactId>
+            <version>5.12.2</version>
+        </dependency>
     </dependencies>
 
 </project>
