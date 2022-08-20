@@ -1,19 +1,38 @@
 package org.example.basic.oj.leetcode.Q2044;
 
-/**
- * @author anyuan
- * @date 2022-03-15 18:13
- */
+import java.util.List;
+
 class Solution {
-    /**
-     * 求有多少种子数组的按位与结果与最大的子数组按位与结果相同
-     *
-     * tips1.最大的按位与就是所有数的按位与
-     *
-     * @param nums
-     * @return
-     */
     public int countMaxOrSubsets(int[] nums) {
-return -1;
+        int target = 0;
+        final int n = nums.length;
+        for (int num : nums) {
+            target |= num;
+        }
+        // 然后就排列组合找等于这个值的
+        int count = 0;
+        final int possibilities = 1 << n;
+        for (int i = 1; i < possibilities; i++) {
+            int temp = i;
+            int digit = 0;
+            int currentOr = 0;
+            while (temp != 0) {
+                if ((temp & 1) != 0) {
+                    currentOr |= nums[digit];
+                }
+                temp >>= 1;
+                digit++;
+            }
+            if (currentOr == target) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        final Solution solution = new Solution();
+//        System.out.println(solution.countMaxOrSubsets(new int[]{3, 1}));
+        System.out.println(solution.countMaxOrSubsets(new int[]{3, 2, 1, 5}));
     }
 }
