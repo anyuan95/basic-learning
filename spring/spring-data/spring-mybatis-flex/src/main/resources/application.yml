@@ -1,0 +1,12 @@
+mybatis-flex:
+  datasource:
+    baseapi:
+      type: com.dianping.zebra.group.jdbc.GroupDataSource
+      jdbcRef: waimaiqabase_ci_baseapi_test
+#      url: jdbc:mysql://10.171.174.186:5002/ci_baseapi?characterEncoding=utf8&useSSL=false
+#      username: ci_baseapi
+#      password: GPnZiwkspoId1k
+#      type: com.zaxxer.hikari.HikariDataSource
+
+
+

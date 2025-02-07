@@ -27,4 +27,12 @@ public class TestJson {
         System.out.println(numberInstance.format(aDouble));
     }
 
+    @Test
+    public void testParseJson() throws JsonProcessingException {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        String json = "{\"id\":1,\"$name\":\"anyuan02\",\"$date\":\"2022-09-08T18:35:53.977Z\"}";
+        final User user = objectMapper.readValue(json, User.class);
+        System.out.println(user);
+    }
+
 }

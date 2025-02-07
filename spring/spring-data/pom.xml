@@ -16,6 +16,8 @@
     <module>spring-jpa</module>
     <module>spring-mybatis-plus</module>
       <module>spring-mybatis</module>
+      <module>spring-mybatis-flex</module>
+      <module>mybatis-generator</module>
   </modules>
 
   <properties>
