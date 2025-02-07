@@ -16,4 +16,12 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>11</version> <!-- 确保此版本与您的JDK兼容 -->
+        </dependency>
+    </dependencies>
+
 </project>
