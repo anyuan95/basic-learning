@@ -28,4 +28,5 @@ hs_err_pid*
 *.idea
 .idea/
 *.iml
+.vscode/
 .vscode/extensions.json

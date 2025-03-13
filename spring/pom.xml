@@ -17,6 +17,7 @@
         <module>my-spring-boot-starter</module>
         <module>spring-data</module>
         <module>spring-testng</module>
+        <module>spring-boot-i18n</module>
     </modules>
 
     <properties>
