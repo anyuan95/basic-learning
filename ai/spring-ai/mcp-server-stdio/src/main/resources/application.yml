@@ -1,0 +1,8 @@
+spring:
+  ai:
+    mcp:
+      server:
+        enabled: true
+        name: time-mcp-server
+        version: 1.0.0
+        type: sync

@@ -1,7 +1,6 @@
 package org.example.basic.java.binary;
 
 import com.google.common.primitives.Ints;
-import sun.tools.jconsole.inspector.XObject;
 
 import java.util.Optional;
 
