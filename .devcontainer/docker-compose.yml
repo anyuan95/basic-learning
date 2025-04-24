@@ -1,0 +1,9 @@
+version: '3'
+services:
+  java:
+    image: mcr.microsoft.com/devcontainers/java:1-17-bookworm
+    volumes:
+      # 挂载远程服务器目录到容器
+        - "/data/jetbrains/workspace/${localWorkspaceFolderBasename}:/workspace/${localWorkspaceFolderBasename}"
+    user: root  # 确保权限
+    working_dir: /workspace/${localWorkspaceFolderBasename}  # 可选：设置容器工作目录
