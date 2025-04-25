@@ -1,7 +1,5 @@
 package org.example.basic.oj.leetcode.Q2;
 
-import javax.xml.soap.Node;
-
 /**
  * @author anyuan
  * @since 2021-08-08 21:37
@@ -64,4 +62,3 @@ class Solution {
         }
     }
 }
-
