@@ -1,0 +1,33 @@
+server:
+  port: 18080
+spring:
+  ai:
+    mcp:
+      client:
+        stdio:
+          root-change-notification: true
+          servers-configuration: classpath:/@os.type@/mcp-servers.json
+#        sse:
+#          connections:
+#            webmvc-mcp-server:
+#              url: 'http://localhost:18081'
+    openai:
+      base-url: ${OPENAI_BASE_URL:https://api.deepseek.com}
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: ${OPENAI_MODEL:deepseek-chat}
+#    openai:
+#      base-url: 'https://api.openai-hk.com'
+#      api-key: ${OPENAI_API_KEY}
+#      chat:
+#        options:
+#          model: 'gpt-4o-2024-08-06'
+#    chat:
+#      client:
+#        enabled: true
+
+logging:
+  level:
+    io.modelcontextprotocol: debug
+    org.springframework.ai: debug

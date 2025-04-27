@@ -6,3 +6,10 @@ spring:
         name: time-mcp-server
         version: 1.0.0
         type: sync
+  # 参考 https://juejin.cn/post/7482670776481021993#heading-6
+  # 注意：（至少在做为mcp-server使用时）需要把控制台打印的所有内容都关掉，避免stdout的内容被client认为是输出
+  main:
+    banner-mode: off
+logging:
+  level:
+    root: OFF
