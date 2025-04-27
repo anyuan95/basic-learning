@@ -1,14 +1,11 @@
 {
   "mcpServers": {
     "github": {
-      "command": "npx",
+      "command": "java",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-github"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "<YOUR_TOKEN>"
-      }
+        "-jar",
+        "/Users/anyuan/IdeaProjects/Private/basic-learning/ai/spring-ai/mcp-server-stdio/target/mcp-server-stdio-1.0-SNAPSHOT.jar"
+      ]
     }
   }
 }
