@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "time-stdio": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "java -jar D:\\Workspaces\\Learning\\basic-learning\\ai\\spring-ai\\mcp-server-stdio\\target\\mcp-server-stdio-1.0-SNAPSHOT.jar"
+      ]
+    }
+  }
+}

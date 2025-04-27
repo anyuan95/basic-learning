@@ -139,7 +139,7 @@
     <!--    </dependencies>-->
 
     <build>
-        <finalName>basic-learning</finalName>
+<!--        <finalName>basic-learning</finalName>-->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -151,5 +151,39 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
+
+    <profiles>
+        <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <!-- 注意：这里不用os.mode，避免spring配置文件中使用@os.mode@时和默认的os.mode冲突 -->
+                <os.type>windows</os.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>unix</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <properties>
+                <os.type>unix</os.type>
+            </properties>
+        </profile>
+
+    </profiles>
+
 </project>

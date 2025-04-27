@@ -1,0 +1,19 @@
+server:
+  port: 18081
+
+# Using spring-ai-starter-mcp-server-webmvc
+spring:
+  ai:
+    mcp:
+      server:
+        enabled: true
+        name: webmvc-mcp-server
+        version: 1.0.0
+        type: SYNC
+        sse-message-endpoint: /mcp/messages
+  main:
+    banner-mode: off
+
+logging:
+  level:
+    org.example.ai.spring.mcp.server.sse.webmvc: DEBUG
