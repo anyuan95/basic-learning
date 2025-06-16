@@ -2,6 +2,7 @@ package org.example.spring.web.sse;
 
 import cn.hutool.core.util.IdUtil;
 import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +20,10 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
  */
 @Controller
 @RequestMapping("/sse")
+@RequiredArgsConstructor
 public class SseController {
 
-    @Resource
-    private SseClient sseClient;
+    private final SseClient sseClient;
 
     @GetMapping("/createSse")
     public SseEmitter createSse(String uid) {
