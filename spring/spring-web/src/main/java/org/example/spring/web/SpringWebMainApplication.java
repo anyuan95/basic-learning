@@ -15,6 +15,6 @@ public class SpringWebMainApplication {
 
     public static void main(String[] args) {
         final ConfigurableApplicationContext context = SpringApplication.run(SpringWebMainApplication.class, args);
-        System.out.println(context.getBean("owner"));
+//        System.out.println(context.getBean("owner"));
     }
 }
