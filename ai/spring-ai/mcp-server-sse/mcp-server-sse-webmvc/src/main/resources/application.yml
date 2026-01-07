@@ -9,10 +9,10 @@ spring:
         enabled: true
         name: webmvc-mcp-server
         version: 1.0.0
-        type: SYNC
+        type: ASYNC
         sse-message-endpoint: /mcp/messages
-  main:
-    banner-mode: off
+#  main:
+#    banner-mode: off
 
 logging:
   level:

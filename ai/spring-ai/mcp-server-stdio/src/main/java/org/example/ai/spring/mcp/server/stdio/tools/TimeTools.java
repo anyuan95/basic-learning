@@ -1,5 +1,6 @@
 package org.example.ai.spring.mcp.server.stdio.tools;
 
+import cn.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
@@ -13,6 +14,7 @@ public class TimeTools implements Tools{
 
     @Tool(description = "获取当前时间戳")
     public Long getCurrentTimestamp() {
+        ThreadUtil.safeSleep(10000L);
         return System.currentTimeMillis();
     }
 

@@ -12,9 +12,10 @@
     <artifactId>spring-ai</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>mcp-server-stdio</module>
         <module>mcp-client</module>
+        <module>mcp-server-stdio</module>
         <module>mcp-server-sse</module>
+        <module>mcp-mixed</module>
     </modules>
 
     <properties>
@@ -50,7 +51,8 @@
             <dependency>
                 <groupId>org.springframework.ai</groupId>
                 <artifactId>spring-ai-bom</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+<!--                <version>1.0.0-SNAPSHOT</version>-->
+                <version>1.0.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

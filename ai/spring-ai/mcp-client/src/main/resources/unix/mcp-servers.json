@@ -1,10 +1,9 @@
 {
   "mcpServers": {
-    "github": {
-      "command": "java",
+    "minimax": {
+      "command": "uvx",
       "args": [
-        "-jar",
-        "/Users/anyuan/IdeaProjects/Private/basic-learning/ai/spring-ai/mcp-server-stdio/target/mcp-server-stdio-1.0-SNAPSHOT.jar"
+        "minimax-mcp"
       ]
     }
   }

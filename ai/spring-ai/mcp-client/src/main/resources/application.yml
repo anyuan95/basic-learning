@@ -7,10 +7,24 @@ spring:
         stdio:
           root-change-notification: true
           servers-configuration: classpath:/@os.type@/mcp-servers.json
-#        sse:
+        #        sse:
 #          connections:
-#            webmvc-mcp-server:
-#              url: 'http://localhost:18081'
+##            baidu-maps:
+###              url: 'https://mcp.map.baidu.com/sse/?ak=4z004mQed2PwK6ScgviRdH96Lm6e9X8O'
+##              url: 'http://10.101.147.99:42220'
+##              sse-endpoint: '/sse'
+#            time:
+#              url: 'https://mcp-mtupwhagdzn-clswlmkkhx.cn-beijing.fcapp.run'
+#              sse-endpoint: '/sse'
+        http:
+          follow-redirects: true
+          max-redirects: 5
+        name: my-spring-ai-mcp-client
+        version: 0.0.1
+        initialized: true
+        # https://docs.spring.io/spring-boot/docs/2.1.12.RELEASE/reference/html/boot-features-external-config.html#boot-features-external-config-conversion-duration
+        # https://docs.digi.com/resources/documentation/digidocs/90001488-13/reference/r_iso_8601_duration_format.htm
+        request-timeout: P30D
     openai:
       base-url: ${OPENAI_BASE_URL:https://api.deepseek.com}
       api-key: ${OPENAI_API_KEY}

@@ -1,0 +1,23 @@
+server:
+  port: 18082
+
+# 使用spring-ai-starter-mcp-server-webmvc和spring-ai-starter-mcp-client
+spring:
+  ai:
+    mcp:
+      server:
+        enabled: true
+        name: mixed-mcp-server
+        version: 1.0.0
+        type: SYNC
+        sse-message-endpoint: /api/mcp/messages
+      client:
+        enabled: true
+        stdio:
+          servers-configuration: classpath:/@os.type@/mcp-servers.json
+
+# 日志配置
+logging:
+  level:
+    org.example.ai.spring.mcp.mixed: DEBUG
+    org.springframework.ai.mcp: INFO
